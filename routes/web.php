@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\StaticController;
 use App\Http\Controllers\EtablissementController;
+use App\Http\Controllers\ServicesController;
 
 
 Route::view("/","welcome");
@@ -32,3 +33,8 @@ Route::get('/etablissements/delete/{id}',[EtablissementController::class,"destro
 
 
 
+
+Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\ServicesController::class, 'index'])->name('home');

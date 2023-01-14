@@ -1,18 +1,4 @@
-{{-- @extends('layout')
-
-@section('content')
-    <div>
-        <h1>Welcome</h1>
-    </div>
-@endsection
-
-
-
-
-@section('title', 'welcome');
- --}}
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 
@@ -39,6 +25,9 @@ https://templatemo.com/tm-538-digital-trend
 
      <!-- MAIN CSS -->
      <link rel="stylesheet" href="{{url('/assets/css/templatemo-digital-trend.css')}}">
+
+     <link rel="stylesheet" href="{{url('/dist/css/landingPage.css')}}">
+
 
 </head>
 <body>
@@ -71,7 +60,7 @@ https://templatemo.com/tm-538-digital-trend
                         <a href="blog.html" class="nav-link">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a href="contact.html" class="nav-link contact">Contact</a>
+                        <a href="/login" class="nav-link contact">Login</a>
                     </li>
                 </ul>
             </div>
@@ -89,7 +78,7 @@ https://templatemo.com/tm-538-digital-trend
 
                                    <h1 class="text-white" data-aos="fade-up">We are ready to help you through your maintaining Journey</h1>
 
-                                   <a class="custom-btn btn-bg btn mt-3" href="/etablissements" data-aos="fade-up" data-aos-delay="100">Let's Start!</a>
+                                   <a class="custom-btn btn-bg btn mt-3" href="/services/etablissements" data-aos="fade-up" data-aos-delay="100">Let's Start!</a>
 
                                    <strong class="d-block py-3 pl-5 text-white" data-aos="fade-up" data-aos-delay="200"><i class="fa fa-phone mr-2"></i> +99 080 070 4224</strong>
                               </div>
