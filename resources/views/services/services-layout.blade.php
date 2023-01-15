@@ -125,7 +125,7 @@
                                 class="img-circle elevation-2" alt="User Image">
                         </div>
                         <div class="info nav-item">
-                           <a href="#" class="nav-link"><h5> {{ Auth::user()->name }}</h5></a>
+                           <a href="#" class="nav-link"><h6> {{ Auth::user()->name }}</h6></a>
                         </div>
                     </div>
 
@@ -136,11 +136,10 @@
                             data-accordion="false">
                             {{-- item --}}
                             <li class="nav-item">
-                                <a href="/home" class="nav-link">
+                                <a href="/services" class="nav-link">
                                     <i class="fa-sharp fa-solid fa-house"></i>
                                     <p>
                                         Home
-                                        <span class="right badge badge-danger">New</span>
                                     </p>
                                 </a>
                             </li>
@@ -155,7 +154,7 @@
                             </li>
                             {{-- item --}}
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="/services/taches" class="nav-link">
                                     <i class="fa-solid fa-list-check"></i>
                                     <p>
                                         Taches
@@ -169,7 +168,6 @@
                                     <i class="fa-solid fa-building"></i>
                                     <p>
                                         Etablissements
-                                        <span class="right badge badge-danger">New</span>
                                     </p>
                                 </a>
                             </li>
