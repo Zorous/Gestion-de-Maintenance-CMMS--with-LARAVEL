@@ -8,6 +8,20 @@
 content:"" !important;
 }
 
+.wrapper {
+    min-height: 10% !important;
+  }
+
+.content{
+    margin: 0 15vw;
+}
+
+.main-header{
+    background-color: #56CCF2!important;
+    color: #fff !important;
+}
+
+
 
 
 /* width */

@@ -4,7 +4,6 @@
 @section('content')
 
 <section class="content">
-Index
 </section>
 
 @endsection

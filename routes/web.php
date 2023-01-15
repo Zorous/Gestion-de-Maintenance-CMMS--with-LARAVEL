@@ -12,7 +12,7 @@ Route::view("/","welcome");
 Route::view("/about","about");
 
 
-Route::view("/services","services.index");
+// Route::view("/services","services.index");
 
 //CREATE
 Route::post('/services/etablissements/store',[EtablissementController::class,"store"]);
@@ -36,5 +36,12 @@ Route::get('/etablissements/delete/{id}',[EtablissementController::class,"destro
 
 Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/home', [App\Http\Controllers\ServicesController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\ServicesController::class, 'index'])->name('home');
+
+
+Route::group(array('before' =>'auth'), function()
+{
+Route::get('/services',[ServicesController::class, 'index']);
+});
+

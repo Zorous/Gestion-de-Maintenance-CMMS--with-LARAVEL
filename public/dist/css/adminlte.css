@@ -10675,11 +10675,11 @@ html.scroll-smooth {
   scroll-behavior: smooth;
 }
 
-html,
+/* html,
 body,
 .wrapper {
-  min-height: 100%;
-}
+  min-height: 20%;
+} */
 
 .wrapper {
   position: relative;
