@@ -3,17 +3,17 @@
 use App\Http\Controllers\EquipmentsController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\StaticController;
+// use App\Http\Controllers\StaticController;
 use App\Http\Controllers\EtablissementController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\TachesController;
 
 
 Route::view("/","welcome");
 Route::view("/about","about");
 
 
-// Route::view("/services","services.index");
-
+//____________________________________________Etablissements_______________________________________________
 //CREATE
 Route::post('/services/etablissements/store',[EtablissementController::class,"store"]);
 
@@ -28,6 +28,20 @@ Route::put('/services/etablissements/update/{id}',[EtablissementController::clas
 
 //DELETE
 Route::get('/etablissements/delete/{id}',[EtablissementController::class,"destroy"]);
+
+
+
+//____________________________________________Taches_______________________________________________
+
+
+//CREATE
+Route::post('/services/taches/store',[TachesController::class,"store"]);
+
+//READ
+Route::resource('/services/taches',TachesController::class);
+
+
+
 
 
 
