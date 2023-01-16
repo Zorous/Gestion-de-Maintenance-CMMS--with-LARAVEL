@@ -9,8 +9,16 @@ use App\Models\Tache;
 class TachesController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
+
+        $this->middleware('auth');
+
         $tache = Tache::all();
         return view("services.taches.index",["taches"=>$tache]);
     }

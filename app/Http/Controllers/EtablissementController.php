@@ -8,9 +8,16 @@ use App\Models\Etablissement;
 
 class EtablissementController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
 
     public function index()
     {
+        $this->middleware('auth');
+
         $Etablissements = Etablissement::all();
         return view("services.etablissements.index",["etabs"=>$Etablissements]);
     }
@@ -43,7 +50,7 @@ class EtablissementController extends Controller
     }
 
     public function edit($id)
-    {   
+    {
         $Etablissement = Etablissement::find($id);
         return view("services/etablissements/update",["id"=>$id,"etab"=>$Etablissement]);
 
@@ -57,7 +64,7 @@ if(isset($Etab)){
         $Etab->adresse = $request->input("adresse");
         $Etab->telephone = $request->input("tele");
         $Etab->responsable = $request->input("responsable");
-        $Etab->update(); 
+        $Etab->update();
         return redirect('/services/etablissements');
 
 }
