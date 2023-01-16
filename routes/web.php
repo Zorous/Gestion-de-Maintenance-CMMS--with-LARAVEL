@@ -13,6 +13,29 @@ Route::view("/","welcome");
 Route::view("/about","about");
 
 
+
+
+
+
+
+
+
+
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\ServicesController::class, 'index'])->name('home');
+
+
+
+
+//Filtering users
+Route::prefix('services')->middleware(['auth','check_admin'])->group( function()
+{
+Route::get('/services',[ServicesController::class, 'index']);
 //____________________________________________Etablissements_______________________________________________
 //CREATE
 Route::post('/services/etablissements/store',[EtablissementController::class,"store"]);
@@ -48,22 +71,5 @@ Route::put('/services/taches/update/{id}',[TachesController::class,"update"]);
 Route::get('/taches/delete/{id}',[TachesController::class,"destroy"]);
 
 
-
-
-
-
-
-
-
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Route::get('/home', [App\Http\Controllers\ServicesController::class, 'index'])->name('home');
-
-
-Route::group(array('before' =>["check_login",'auth']), function()
-{
-Route::get('/services',[ServicesController::class, 'index']);
 });
 

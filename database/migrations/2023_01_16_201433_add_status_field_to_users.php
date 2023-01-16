@@ -6,12 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
- 
+
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
 
-            $table->string('status')->nullable()->after('name');
+            $table->tinyInteger('status')->nullable()->after('name')->default(0);
 
         });
     }

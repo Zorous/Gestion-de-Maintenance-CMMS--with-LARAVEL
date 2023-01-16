@@ -2,6 +2,9 @@
 
 
 @section('content')
+@auth()
+@if(auth()->user()->status)
+
 <div class="content-wrapper">
 
 <section class="content">
@@ -77,6 +80,10 @@
 </section>
 
 </div>
+
+@endif
+@else
+<h1>Is not admin:</h1>
 @endsection
 
 @section('title','taches')
