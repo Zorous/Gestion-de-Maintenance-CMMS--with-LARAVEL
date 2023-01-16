@@ -40,6 +40,14 @@ Route::post('/services/taches/store',[TachesController::class,"store"]);
 //READ
 Route::resource('/services/taches',TachesController::class);
 
+//UPDATE
+Route::get('/taches/edit/{id}',[TachesController::class,"edit"]);
+Route::put('/services/taches/update/{id}',[TachesController::class,"update"]);
+
+//DELETE
+Route::get('/taches/delete/{id}',[TachesController::class,"destroy"]);
+
+
 
 
 
@@ -54,7 +62,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Route::get('/home', [App\Http\Controllers\ServicesController::class, 'index'])->name('home');
 
 
-Route::group(array('before' =>'auth'), function()
+Route::group(array('before' =>["check_login",'auth']), function()
 {
 Route::get('/services',[ServicesController::class, 'index']);
 });

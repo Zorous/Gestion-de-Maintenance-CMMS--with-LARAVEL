@@ -11,8 +11,8 @@ class TachesController extends Controller
 
     public function index()
     {
-        $taches = Tache::all();
-        return view("services.taches.index",["taches"=>$taches]);
+        $tache = Tache::all();
+        return view("services.taches.index",["taches"=>$tache]);
     }
 
 
@@ -26,13 +26,13 @@ class TachesController extends Controller
     public function store(Request $request)
     {
         //
-        $Taches = new Tache;
+        $tache = new Tache;
 
-        $Taches->description = $request->input("description");
-        $Taches->date = $request->input("date");
-        $Taches->duree = $request->input("duree");
+        $tache->description = $request->input("description");
+        $tache->date = $request->input("date");
+        $tache->duree = $request->input("duree");
 
-        $Taches->save();
+        $tache->save();
 
         return redirect('services/taches');
     }
@@ -45,17 +45,32 @@ class TachesController extends Controller
 
     public function edit($id)
     {
-        //
+        $tache = Tache::find($id);
+
+        return view('services.taches.update',['tache'=>$tache,"id"=>$id]);
     }
 
     public function update(Request $request, $id)
     {
-        //
-    }
+        $tache = Tache::find($id);
+
+        $tache->description = $request->input("description");
+        $tache->date = $request->input("date");
+        $tache->duree = $request->input("duree");
+
+
+        $tache->save();
+
+        return redirect('services/taches');
+      }
 
 
     public function destroy($id)
     {
-        //
+        $tache = Tache::find($id);
+
+        $tache->delete();
+
+        return redirect('services/taches');
     }
 }
