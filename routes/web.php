@@ -60,19 +60,22 @@ Route::get('/etablissements/delete/{id}',[EtablissementController::class,"destro
 
 //____________________________________________Taches_______________________________________________
 
+Route::prefix('services')->middleware(['auth', 'check_login'])->group(function () {
+Route::resource('taches',TachesController::class);
 
-//CREATE
-Route::post('/services/taches/store',[TachesController::class,"store"]);
+});
+
 
 //READ
-Route::resource('/services/taches',TachesController::class);
 
+/* //CREATE
+Route::post('/services/taches/store',[TachesController::class,"store"]);
 //UPDATE
 Route::get('/taches/edit/{id}',[TachesController::class,"edit"]);
 Route::put('/services/taches/update/{id}',[TachesController::class,"update"]);
 
 //DELETE
-Route::get('/taches/delete/{id}',[TachesController::class,"destroy"]);
+Route::get('/taches/delete/{id}',[TachesController::class,"destroy"]);*/
 });
 
 
@@ -90,3 +93,10 @@ Route::put('/services/equipements/update/{id}',[EquipementsController::class,"up
 
 //DELETE
 Route::get('/services/equipements/delete/{id}',[EquipementsController::class,"destroy"]);
+
+
+
+
+//_________________________________Techniciens_______________________________
+
+// Route::resource('/services/techniciens',::class);

@@ -13,7 +13,7 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1>Voila les établissements disponible : </h1>
-           <a href="/services/taches/create" style="margin:auto;">
+           <a href="{{ route('taches.create') }}" style="margin:auto;">
             <button class="btn btn-warning m-5">
             + Ajouter une tache
             </button></a>
@@ -59,8 +59,13 @@
 <td>{{$tache->date}}</td>
 <td>{{$tache->duree}}</td>
           <td>
-           <a href="{{ url('/taches/edit/'.$tache->id) }}"><button class="btn btn-warning mb-2"><i class="fa-solid fa-pen-to-square"></i></button></a>
-            <a href="{{ url('/taches/delete/'.$tache->id) }}"> <button class="btn btn-danger mb-2"><i class="fa-solid fa-trash"></i></button></a>
+           <a href="{{ route('taches.edit',$tache->id) }}">
+            <button class="btn btn-warning mb-2"><i class="fa-solid fa-pen-to-square"></i></button></a>
+            <form method="post" action="{{ route('taches.destroy', $tache->id) }}">
+                @csrf
+                @method('DELETE')
+                 <button type="submit" class="btn btn-danger mb-2"><i class="fa-solid fa-trash"></i></button>
+            </form>
           </td>
         </tr>
         @endforeach

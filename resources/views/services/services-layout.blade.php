@@ -148,7 +148,6 @@
                                     <i class="fa-solid fa-screwdriver-wrench"></i>
                                     <p>
                                         Equipements
-                                        <span class="right badge badge-danger">New</span>
                                     </p>
                                 </a>
                             </li>
@@ -168,6 +167,15 @@
                                     <i class="fa-solid fa-building"></i>
                                     <p>
                                         Etablissements
+                                    </p>
+                                </a>
+                            </li>
+                            {{-- item --}}
+                            <li class="nav-item">
+                                <a href="/services/techniciens" class="nav-link">
+                                    <i class="fa-solid fa-building"></i>
+                                    <p>
+                                        Téchniciens
                                     </p>
                                 </a>
                             </li>

@@ -6,7 +6,7 @@
 @section('content')
 <div class="container mt-5 p-5" style="margin-left:10vw;">
     <h1 class="m-5">Ajouter une Tache</h1>
-<form action="/services/taches/store" method="POST">
+<form action="{{route('taches.store')}}" method="POST">
 @csrf
     <div class="form-group">
       <label for="description">Description</label>

@@ -6,7 +6,7 @@
 @section('content')
 <div class="container mt-5 p-5" style="margin-left:10vw;">
     <h1 class="m-5">Modifier cette tache</h1>
-<form action={{"/services/taches/update/".$id}} method="POST">
+<form action={{route("taches.update",$id)}} method="POST">
 @csrf
 {{ method_field('PUT') }}
 

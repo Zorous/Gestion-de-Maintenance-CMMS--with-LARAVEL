@@ -13,7 +13,7 @@ class TachesController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
 
