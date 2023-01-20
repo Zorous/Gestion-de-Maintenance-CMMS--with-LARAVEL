@@ -121,8 +121,8 @@
                     <!-- Sidebar user panel (optional) -->
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img src="https://openclipart.org/image/2400px/svg_to_png/247320/abstract-user-flat-4.png"
-                                class="img-circle elevation-2" alt="User Image">
+                            <img src={{"/uploads/profil_imgs/".Auth::user()->image}}
+                                class="img-circle elevation-2" style="width:45px !important;height:45px !important;" alt="User Image">
                         </div>
                         <div class="info nav-item">
                            <a href="{{'/profile/'.Auth::user()->id}}" class="nav-link"><h6> {{ Auth::user()->name }}</h6></a>

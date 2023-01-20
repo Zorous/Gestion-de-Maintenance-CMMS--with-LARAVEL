@@ -2,11 +2,12 @@
 
 
 @section('content')
-    <div class="container mt-5 p-5" style="margin-left:10vw;">
+    <div class="container p-5" style="margin:auto;">
         <h1 class="m-5">Ajouter un équipements</h1>
         <form action="/services/equipements/store" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="form-group">
+<div class="row">
+           <div class="col-6"> <div class="form-group">
                 <label for="description">Description</label>
                 <input type="text" class="form-control" name="description" id="description">
             </div>
@@ -25,7 +26,8 @@
             <div class="form-group">
                 <label for="prix">Prix</label>
                 <input type="text" class="form-control" name="prix" id="prix">
-            </div>
+            </div></div>
+            <div class="col-6">
             <div class="form-group">
                 <label for="marque">Marque</label>
                 <input type="text" class="form-control" name="marque" id="marque">
@@ -59,9 +61,9 @@
                 <input type="checkbox" name="piece_rechange" id="piece_rechange" value="1">
                 <label for="piece_rechange">est une piéce de rechange : </label>
             </div>
-
+</div>
             <button type="submit" class="btn btn-success">+ Ajouter un équipement</button>
-        </form>
+        </div></form>
     </div>
 @endsection
 

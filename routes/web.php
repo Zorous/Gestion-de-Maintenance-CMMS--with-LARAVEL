@@ -4,7 +4,7 @@ use App\Http\Controllers\EquipementsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TechnicienController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EtablissementController
+use App\Http\Controllers\EtablissementController;
 // use App\Http\Controllers\StaticController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\TachesController;
