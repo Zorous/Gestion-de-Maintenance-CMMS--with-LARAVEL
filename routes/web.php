@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\EquipmentsController;
+use App\Http\Controllers\EquipementsController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TechnicienController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\EtablissementController
 // use App\Http\Controllers\StaticController;
-use App\Http\Controllers\EtablissementController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\TachesController;
 
@@ -12,10 +13,16 @@ use App\Http\Controllers\TachesController;
 Route::view("/","welcome");
 Route::view("/about","about");
 
+Route::resource('/technicien',TechnicienController::class);
 
 
 
+//__________________________PROFILE_________________________________
 
+Route::get('/profile/{id}',[ProfileController::class,"show"]);
+Route::get('/profile/{id}/edit',[ProfileController::class,"edit"]);
+
+Route::put('/services/profile/update/{id}',[ProfileController::class,"update"]);
 
 
 
@@ -68,3 +75,18 @@ Route::put('/services/taches/update/{id}',[TachesController::class,"update"]);
 Route::get('/taches/delete/{id}',[TachesController::class,"destroy"]);
 });
 
+
+//____________________________________________Equipements_______________________________________________
+
+
+//CREATE
+Route::post('/services/equipements/store',[EquipementsController::class,"store"]);
+
+//READ
+Route::resource('/services/equipements',EquipementsController::class);
+//UPDATE
+Route::get('/services/equipements/edit/{id}',[EquipementsController::class,"edit"]);
+Route::put('/services/equipements/update/{id}',[EquipementsController::class,"update"]);
+
+//DELETE
+Route::get('/services/equipements/delete/{id}',[EquipementsController::class,"destroy"]);

@@ -4,8 +4,27 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Equipement;
 
-class Categories extends Model
+
+class Categorie extends Model
 {
     use HasFactory;
+
+protected $fillable=[
+    'id',
+    'categorie'
+];
+
+
+
+
+public function equipements(){
+    return $this->hasMany(Equipement::class, 'categorie_id', 'id');
 }
+
+
+}
+
+
+

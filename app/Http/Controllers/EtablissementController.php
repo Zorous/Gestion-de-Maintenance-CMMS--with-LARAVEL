@@ -12,7 +12,7 @@ class EtablissementController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
 
     public function index()
     {
@@ -59,11 +59,14 @@ class EtablissementController extends Controller
     public function update(Request $request, $id)
     {
         $Etab = Etablissement::find($id);
+
 if(isset($Etab)){
         $Etab->raison_social = $request->input("raison-social");
         $Etab->adresse = $request->input("adresse");
         $Etab->telephone = $request->input("tele");
         $Etab->responsable = $request->input("responsable");
+
+
         $Etab->update();
         return redirect('/services/etablissements');
 

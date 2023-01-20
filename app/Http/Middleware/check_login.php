@@ -10,7 +10,7 @@ class check_login
 
     public function handle(Request $request, Closure $next)
     {
-        echo "<script>alert('Welcome Mistre Admin');</script>";
+        // echo "<script>alert('Welcome Mistre Admin');</script>";
         if(Auth::check()){
             if(Auth::user()->status == '1'){
                 return $next($request);

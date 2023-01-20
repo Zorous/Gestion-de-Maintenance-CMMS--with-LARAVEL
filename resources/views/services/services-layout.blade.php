@@ -125,7 +125,7 @@
                                 class="img-circle elevation-2" alt="User Image">
                         </div>
                         <div class="info nav-item">
-                           <a href="#" class="nav-link"><h6> {{ Auth::user()->name }}</h6></a>
+                           <a href="{{'/profile/'.Auth::user()->id}}" class="nav-link"><h6> {{ Auth::user()->name }}</h6></a>
                         </div>
                     </div>
 
@@ -144,7 +144,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="/services/equipements" class="nav-link">
                                     <i class="fa-solid fa-screwdriver-wrench"></i>
                                     <p>
                                         Equipements
@@ -177,6 +177,17 @@
                                     <i class="fa-solid fa-calendar"></i>
                                     <p>
                                         Planning
+                                        <span class="right badge badge-danger">New</span>
+                                    </p>
+                                </a>
+                            </li>
+                            </li>
+                            {{-- item --}}
+                            <li class="nav-item">
+                                <a href="/techniciens" class="nav-link">
+                                    <i class="fa-solid fa-calendar"></i>
+                                    <p>
+                                       Techniciens
                                         <span class="right badge badge-danger">New</span>
                                     </p>
                                 </a>

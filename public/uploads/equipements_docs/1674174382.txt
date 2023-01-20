@@ -1,0 +1,74 @@
+<h1><?php echo ucwords($first_name);?><br><b><?php echo ucwords($last_name);?></b></h1>
+
+____________________________________________________________________________________________________________________
+<?php echo $phone;?>
+
+<?php echo $email;?>
+
+____________________________________________________________________________________________________________________
+Skills : 
+<?php 
+      for($j=0; $j<count($skills); $j++){
+          echo "<div class='skill-1'>
+                  <p><strong>" . strtoupper($skills[$j]) . "</strong></p>
+                  <div class='progress'>";
+            for($i=0;$i<$skill_levels[$j];$i++){
+              echo '&nbsp;&nbsp;  <div class="fas fa-star active"></div>';
+              
+            }
+            echo '</div></div>';
+
+          }
+      ?>
+____________________________________________________________________________________________________________________
+
+
+Hobbies : 
+
+     <?php 
+        foreach($hobbies as $hobby)
+        {
+          echo "<div class='d-flex align-items-center'>
+          <div class='circle'></div>
+          <div><strong>" . ucwords($hobby) . "</strong></div>
+        </div>";
+        }
+      
+      ?> 
+____________________________________________________________________________________________________________________
+ Profession : 
+
+<?php echo ucwords($profession);?>
+____________________________________________________________________________________________________________________
+About me : 
+
+<?php echo $about_me;?>
+____________________________________________________________________________________________________________________
+Education : 
+
+        <?php 
+          for($i=0; $i<count($institutes);$i++)
+          {
+            echo "<ul>
+            <li>
+              <div class='msg-1' style='color: white;'>" . $froms[$i] . "-" . $tos[$i]. " | " . ucwords($degrees[$i]) . ", " . $grades[$i]. "</div>
+              <div class='msg-2' style='color: white;'>" . ucwords($institutes[$i]) . "</div>
+            </li>
+          </ul>";
+          } ?>
+___________________________________________________________________________________________________________________  
+
+Experience : 
+
+ <?php 
+          for($i=0; $i<count($titles);$i++)
+          {
+            echo "<ul>
+            <li>
+              <div class='msg-1'><br></div>
+              <div class='msg-2' style='color: white;'>" . ucwords($titles[$i]) ."</div>
+              <div class='msg-3' style='color: white;'>" . ucfirst($descriptions[$i]) . "</div>
+            </li>
+          </ul>";
+          }
+        ?>
