@@ -13,7 +13,7 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1>Voila les équipements : </h1>
-           <a href="/services/equipements/create" style="margin:auto;">
+           <a href="{{ route('equipements.create') }}" style="margin:auto;">
             <button class="btn btn-warning m-5">
             + Ajouter une equipment
             </button></a>
@@ -31,7 +31,7 @@
     <div class="container-fluid m-3">
       <div class="row">
          @foreach($equipments as $equipment)
-        <div class="col col-sm-12 col-md-6 col-lg-3">
+        <div class="col col-sm-12 col-md-6">
 {{-- <h1>{{print_r($equipments)}}</h1> --}}
 
 <div class="card m-5" style="width: 18rem;">
@@ -40,8 +40,13 @@
     <h5 class="card-title">{{$equipment->designation}}</h5>
     <p class="card-text">{{$equipment->description}}</p>
     <a href="#" class="btn btn-small btn-primary">Détaills</a>
-    <a href="{{ url('/equipements/edit/'.$equipment->id) }}"><button class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button></a>
-            <a href="{{ url('/services/equipements/delete/'.$equipment->id) }}"> <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button></a>
+    <a href="{{ route('equipements.edit',$equipment->id) }}"><button class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button></a>
+    <form action="{{ route('equipements.destroy',$equipment->id) }}" method="post">
+        @csrf
+        @method('DELETE')
+     <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+
+    </form>
   </div>
 </div>
 

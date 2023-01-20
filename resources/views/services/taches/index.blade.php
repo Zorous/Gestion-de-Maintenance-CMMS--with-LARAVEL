@@ -58,10 +58,10 @@
 <td>{{$tache->description}}</td>
 <td>{{$tache->date}}</td>
 <td>{{$tache->duree}}</td>
-          <td>
+          <td style="display:flex;">
            <a href="{{ route('taches.edit',$tache->id) }}">
-            <button class="btn btn-warning mb-2"><i class="fa-solid fa-pen-to-square"></i></button></a>
-            <form method="post" action="{{ route('taches.destroy', $tache->id) }}">
+            <button class="btn btn-warning mr-2"><i class="fa-solid fa-pen-to-square"></i></button></a>
+             <form method="post" action="{{ route('taches.destroy', $tache->id) }}">
                 @csrf
                 @method('DELETE')
                  <button type="submit" class="btn btn-danger mb-2"><i class="fa-solid fa-trash"></i></button>

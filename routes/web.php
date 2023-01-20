@@ -56,12 +56,15 @@ Route::put('/services/etablissements/update/{id}',[EtablissementController::clas
 //DELETE
 Route::get('/etablissements/delete/{id}',[EtablissementController::class,"destroy"]);
 
+});
 
 
 //____________________________________________Taches_______________________________________________
 
 Route::prefix('services')->middleware(['auth', 'check_login'])->group(function () {
 Route::resource('taches',TachesController::class);
+
+Route::resource('equipements',EquipementsController::class);
 
 });
 
@@ -76,13 +79,12 @@ Route::put('/services/taches/update/{id}',[TachesController::class,"update"]);
 
 //DELETE
 Route::get('/taches/delete/{id}',[TachesController::class,"destroy"]);*/
-});
 
 
 //____________________________________________Equipements_______________________________________________
 
 
-//CREATE
+/* //CREATE
 Route::post('/services/equipements/store',[EquipementsController::class,"store"]);
 
 //READ
@@ -92,7 +94,7 @@ Route::get('/services/equipements/edit/{id}',[EquipementsController::class,"edit
 Route::put('/services/equipements/update/{id}',[EquipementsController::class,"update"]);
 
 //DELETE
-Route::get('/services/equipements/delete/{id}',[EquipementsController::class,"destroy"]);
+Route::get('/services/equipements/delete/{id}',[EquipementsController::class,"destroy"]); */
 
 
 

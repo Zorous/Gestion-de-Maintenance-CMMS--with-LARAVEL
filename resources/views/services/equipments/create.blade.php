@@ -4,7 +4,7 @@
 @section('content')
     <div class="container p-5" style="margin:auto;">
         <h1 class="m-5">Ajouter un équipements</h1>
-        <form action="/services/equipements/store" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('equipements.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 <div class="row">
            <div class="col-6"> <div class="form-group">

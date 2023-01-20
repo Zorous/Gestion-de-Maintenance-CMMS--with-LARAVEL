@@ -97,14 +97,19 @@ class EquipementsController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit(Equipement $equipement)
     {
-        //
+         $categories = Categorie::all();
+        $services = Service::all();
+        return view('services/equipments/update',
+        ["equipement"=>$equipement,
+        "categories"=>$categories,
+        "services"=>$services]);
     }
 
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     public function destroy($id)
@@ -114,6 +119,6 @@ class EquipementsController extends Controller
         // dd($Equipement);
         $Equipement->delete();
 
-        return redirect('services/equipements');
+        return redirect('services/equipments');
     }
 }
