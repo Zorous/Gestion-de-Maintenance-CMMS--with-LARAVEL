@@ -33,15 +33,14 @@ Route::put('/services/profile/update/{id}',[ProfileController::class,"update"]);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Route::get('/home', [App\Http\Controllers\ServicesController::class, 'index'])->name('home');
 
 
-Route::group(array('before' =>["check_login",'auth']), function()
+/* Route::group(array('before' =>["check_login",'auth']), function()
 {
 Route::get('/services',[ServicesController::class, 'index']);
 
 //____________________________________________Etablissements_______________________________________________
-//CREATE
+/* //CREATE
 Route::post('/services/etablissements/store',[EtablissementController::class,"store"]);
 
 //READ
@@ -56,49 +55,21 @@ Route::put('/services/etablissements/update/{id}',[EtablissementController::clas
 //DELETE
 Route::get('/etablissements/delete/{id}',[EtablissementController::class,"destroy"]);
 
-});
 
 
+}); */
 //____________________________________________Taches_______________________________________________
 
 Route::prefix('services')->middleware(['auth', 'check_login'])->group(function () {
+
+//Taches
 Route::resource('taches',TachesController::class);
 
+//Equipements
 Route::resource('equipements',EquipementsController::class);
+
+//Etablissements
+Route::resource('etablissements',EtablissementController::class);
 
 });
 
-
-//READ
-
-/* //CREATE
-Route::post('/services/taches/store',[TachesController::class,"store"]);
-//UPDATE
-Route::get('/taches/edit/{id}',[TachesController::class,"edit"]);
-Route::put('/services/taches/update/{id}',[TachesController::class,"update"]);
-
-//DELETE
-Route::get('/taches/delete/{id}',[TachesController::class,"destroy"]);*/
-
-
-//____________________________________________Equipements_______________________________________________
-
-
-/* //CREATE
-Route::post('/services/equipements/store',[EquipementsController::class,"store"]);
-
-//READ
-Route::resource('/services/equipements',EquipementsController::class);
-//UPDATE
-Route::get('/services/equipements/edit/{id}',[EquipementsController::class,"edit"]);
-Route::put('/services/equipements/update/{id}',[EquipementsController::class,"update"]);
-
-//DELETE
-Route::get('/services/equipements/delete/{id}',[EquipementsController::class,"destroy"]); */
-
-
-
-
-//_________________________________Techniciens_______________________________
-
-// Route::resource('/services/techniciens',::class);

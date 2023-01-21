@@ -144,7 +144,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/services/equipements" class="nav-link">
+                                <a href="{{ route('equipements.index') }}" class="nav-link">
                                     <i class="fa-solid fa-screwdriver-wrench"></i>
                                     <p>
                                         Equipements
@@ -153,7 +153,7 @@
                             </li>
                             {{-- item --}}
                             <li class="nav-item">
-                                <a href="/services/taches" class="nav-link">
+                                <a href="{{ route('taches.index') }}" class="nav-link">
                                     <i class="fa-solid fa-list-check"></i>
                                     <p>
                                         Taches

@@ -6,7 +6,7 @@
 @section('content')
 <div class="container mt-5 p-5" style="margin-left:10vw;">
     <h1 class="m-5">Ajouter une établissements</h1>
-<form action="/services/etablissements/store" method="POST">
+<form action="{{route('etablissements.store')}}" method="POST" enctype="multipart/form-data">
 @csrf
     <div class="form-group">
       <label for="raison">Raison Social</label>

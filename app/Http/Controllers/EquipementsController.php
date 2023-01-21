@@ -97,12 +97,16 @@ class EquipementsController extends Controller
     }
 
 
-    public function edit(Equipement $equipement)
+    public function edit($id)
     {
          $categories = Categorie::all();
         $services = Service::all();
-        return view('services/equipments/update',
-        ["equipement"=>$equipement,
+
+        $equipement = Equipement::find($id);
+        return view('services.equipments.update',
+        [
+        "id"=>$id,
+        "equipements"=>$equipement,
         "categories"=>$categories,
         "services"=>$services]);
     }

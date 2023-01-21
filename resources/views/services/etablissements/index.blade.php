@@ -12,7 +12,7 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1>Voila les établissements disponible : </h1>
-           <a href="/services/etablissements/create" style="margin:auto;">
+           <a href="{{ route('etablissements.create') }}" style="margin:auto;">
             <button class="btn btn-warning m-5">
             + Ajouter une établissements
             </button></a>
@@ -59,9 +59,12 @@
           <td>{{$etab->telephone}}</td>
           <td>{{$etab->responsable}}</td>
           <td>
-           <a href="{{ url('/etablissements/edit/'.$etab->id) }}"><button class="btn btn-warning mb-2"><i class="fa-solid fa-pen-to-square"></i></button></a>
-            <a href="{{ url('/etablissements/delete/'.$etab->id) }}"> <button class="btn btn-danger mb-2"><i class="fa-solid fa-trash"></i></button></a>
-          </td>
+           <a href="{{ route('etablissements.edit',$etab->id) }}"><button class="btn btn-warning mb-2"><i class="fa-solid fa-pen-to-square"></i></button></a>
+           <form action="{{ route('etablissements.destroy',$etab->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-danger mb-2"><i class="fa-solid fa-trash"></i></button>
+         </form> </td>
         </tr>
         @endforeach
 
