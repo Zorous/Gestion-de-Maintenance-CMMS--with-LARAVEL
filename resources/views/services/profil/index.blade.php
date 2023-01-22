@@ -2,7 +2,7 @@
 
 
 @section('content')
-<div class="content-wrapper" style="margin-right:20vw;">
+<div class="content-wrapper mt-5" style="margin-right:20vw;">
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -13,7 +13,7 @@
               </div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item"><a href="/services">Home</a></li>
                   <li class="breadcrumb-item active">User Profile</li>
                 </ol>
               </div>

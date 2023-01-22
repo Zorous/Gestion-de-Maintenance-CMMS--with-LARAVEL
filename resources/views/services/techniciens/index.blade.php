@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <div class="content-wrapper mt-5 ml-5">
+    <div class="content-wrapper" >
         <!-- Main content -->
         <h1 class="mt-5 ml-5">Voila les techniciens :</h1>
         <a href="{{ route('techniciens.create') }}" style="margin:auto;">
@@ -22,11 +22,11 @@
                              src="{{ url('/uploads/techniciens_imgs/'.$tech->image) }}"
                              alt="User profile picture">
                       </div>
-  
+
                       <h3 class="profile-username text-center">{{ $tech->nom." ".$tech->prenom}}</h3>
-  
+
                       <p class="text-muted text-center">{{ $tech->specialite }}</p>
-  
+
                       <ul class="list-group list-group-bordered mb-3">
                         <li class="list-group-item">
                           <b>Les Activités</b> <a class="float-right">1,322</a>
@@ -38,8 +38,8 @@
                           <b>Les Taches Complet</b> <a class="float-right">13,287</a>
                         </li>
                       </ul>
-  
-                      <a href="#" class="btn btn-primary btn-block"><b>Contact</b></a>
+
+                      <a href={{"/services/technicien/mailForm/".$tech->id}} class="btn btn-primary btn-block"><b>Contact</b></a>
                     </div>
                     <!-- /.card-body -->
                   </div>

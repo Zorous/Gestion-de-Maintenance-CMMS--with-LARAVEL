@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\EquipementsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TechnicienController;
@@ -31,6 +32,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 /* Route::group(array('before' =>["check_login",'auth']), function()
 {
 }); */
+
 //____________________________________________Taches_______________________________________________
 
 Route::prefix('services')->middleware(['auth', 'check_login'])->group(function () {
@@ -50,5 +52,10 @@ Route::resource('etablissements',EtablissementController::class);
 //Techniciens
 Route::resource('techniciens',TechnicienController::class);
 
+
 });
+
+//Mailing
+Route::get('/services/technicien/mailForm/{id}',[EmailController::class,"mailForm"]);
+Route::get('/services/technicien/sendMail',[EmailController::class,"sendMail"]);
 
