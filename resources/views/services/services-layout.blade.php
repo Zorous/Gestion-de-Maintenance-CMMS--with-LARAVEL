@@ -113,7 +113,7 @@
                 <!-- Brand Logo -->
                 {{--     <a href="index3.html" class="brand-link">
         <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+        <span class="brand-text font-weight-light">X    </span>
         </a> --}}
 
                 <!-- Sidebar -->
@@ -163,22 +163,15 @@
                             </li>
                             {{-- item --}}
                             <li class="nav-item">
-                                <a href="/services/etablissements" class="nav-link">
+                                <a href="{{route('etablissements.index')}}" class="nav-link">
                                     <i class="fa-solid fa-building"></i>
                                     <p>
                                         Etablissements
                                     </p>
                                 </a>
                             </li>
-                            {{-- item --}}
-                            <li class="nav-item">
-                                <a href="/services/techniciens" class="nav-link">
-                                    <i class="fa-solid fa-building"></i>
-                                    <p>
-                                        Téchniciens
-                                    </p>
-                                </a>
-                            </li>
+                            
+                   
                             {{-- item --}}
                             <li class="nav-item">
                                 <a href="pages/widgets.html" class="nav-link">
@@ -192,8 +185,8 @@
                             </li>
                             {{-- item --}}
                             <li class="nav-item">
-                                <a href="/techniciens" class="nav-link">
-                                    <i class="fa-solid fa-calendar"></i>
+                                <a href="{{ route('techniciens.index') }}" class="nav-link">
+                                    <i class="fa-solid fa-toolbox"></i> 
                                     <p>
                                        Techniciens
                                         <span class="right badge badge-danger">New</span>

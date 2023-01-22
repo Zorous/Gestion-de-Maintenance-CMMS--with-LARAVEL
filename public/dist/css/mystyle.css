@@ -25,6 +25,52 @@ content:"" !important;
 }
 
 
+/*___________________Forms style__________________*/
+form{
+    border: 1px solid #fff;
+    border-radius: 7px;
+    padding: 60px;
+    justify-content: center;
+    align-items: center;
+}
+.form-group{
+    border-bottom: 1px dashed #fff;
+    padding-bottom: 20px;
+   
+}
+input{
+    width: 20em !important;
+    border-radius: 12px !important;
+    margin: auto;
+}
+input[type=text]:focus-visible{
+    border:#56CCF2 1px solid ;
+}
+button{
+    border-radius: 24px !important;
+}
+
+
+td form,.card form{
+    border: 0px;
+    padding: 0px;
+    margin: 0px;
+}
+
+
+/*________________________Title's style_____________________*/
+h1{
+   /* color: #56CCF2 ; */
+   font-weight: 700;
+}
+
+
+/*________________________Tables style_____________________*/
+
+table{
+    width: 60em !important;
+    margin: auto;
+}
 
 
 /* width */

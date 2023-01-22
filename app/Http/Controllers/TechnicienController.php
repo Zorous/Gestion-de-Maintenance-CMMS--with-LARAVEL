@@ -2,81 +2,77 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
+use App\Models\Technicien;
 use Illuminate\Http\Request;
+use App\Models\Specialite;
+
+use Illuminate\Support\Facades\DB;
 
 class TechnicienController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        return view('services.technicien.index');
+        //Normal user verification
+        // $User = DB::table('users')->where('status', "=", 0)->get();
+        // dd($User);
+
+        $tech = DB::table('techniciens')->join('specialites', "specialites.id", "=", "techniciens.specialite_id")->get();
+        // dd($tech);
+        return view('services.techniciens.index', ["techniciens" => $tech]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        $specialites = Specialite::all();
+        return view('services.techniciens.create', ["specialites" => $specialites]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $Technicien = new Technicien;
+
+        $Technicien->nom = $request->input('nom');
+        $Technicien->prenom = $request->input('prenom');
+        $Technicien->telephone = $request->input('tele');
+        $Technicien->email = $request->input('email');
+        $Technicien->specialite_id = $request->input('specialites');
+     //Image Treatment
+     if ($request->hasFile('image')) {
+        $file = $request->file('image');
+        $fileExtension = $file->getClientOriginalExtension();
+        $fileName = time() . "." . $fileExtension;
+        $file->move("uploads/techniciens_imgs",$fileName);
+        $Technicien->image = $fileName;
+    }else {
+        $Technicien->image = "default.png";
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+        $Technicien->save();
+
+        return redirect("services/techniciens");
+    }
+
+
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
