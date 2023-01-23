@@ -11,26 +11,13 @@
       <!-- /.card-header -->
       <div class="card-body">
         <div class="form-group">
-          <input class="form-control" placeholder="To:" value="{{ $technicien->email }}">
+          <input class="form-control" name="email" placeholder="To:" value="{{ $technicien->email }}">
         </div>
         <div class="form-group">
           <input class="form-control" name="subject" placeholder="Subject:">
         </div>
         <div class="form-group">
-            <textarea id="compose-textarea" class="form-control" style="height: 300px">
-              <h1><u>Heading Of Message</u></h1>
-              <h4>Subheading</h4>
-              <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain
-                was born and I will give you a complete account of the system, and expound the actual teachings</p>
-              <ul>
-                <li>List item one</li>
-                <li>List item two</li>
-                <li>List item three</li>
-                <li>List item four</li>
-              </ul>
-              <p>Thank you,</p>
-              <p>John Doe</p>
-            </textarea>
+            <textarea id="compose-textarea" name="message" class="form-control" style="height: 300px"></textarea>
         </div>
         <div class="form-group">
           <div class="btn btn-default btn-file">

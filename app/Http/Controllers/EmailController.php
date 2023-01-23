@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Mail\MailNotify;
 use App\Models\Technicien;
 use Illuminate\Http\Request;
-use App\Mail\SignUp;
 use Illuminate\Support\Facades\Mail;
 
 class EmailController extends Controller
@@ -18,11 +17,14 @@ class EmailController extends Controller
     }
 
     public function sendMail(Request $request){
-        $name = $request->input('name');
-        // return 'haha';
+        $subject = $request->input('subject');
+        $message = $request->input('message');
+        $email = $request->input('email');
+        // dd($subject);
 
-        // Mail::to('test@gmail.com')->send(new MailNotify());
-        return "<h1>SendMail</h1>";
+
+        Mail::to($email)->send(new MailNotify($subject,$message));
+        // return "<h1>SendMail</h1>";
     }
 
 }
