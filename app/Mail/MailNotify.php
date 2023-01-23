@@ -14,21 +14,19 @@ class MailNotify extends Mailable
     use Queueable, SerializesModels;
 
     public $subject;
-    public $email;
-    public $message;
+    public $urmessage;
 
-    public function __construct($subject,$message)
-    {
-        $this->subject->$subject;
-        // $this->email->$email;
-        $this->message->$message;
+    public function __construct($subject,$urmessage)
+    {    $this->subject = $subject ?? "null";
+        $this->urmessage = $urmessage ?? "null";
+
     }
 
 
     public function envelope()
     {
         return new Envelope(
-            subject: 'Mail Notify',
+            subject: $this->subject,
         );
     }
 
@@ -42,7 +40,7 @@ class MailNotify extends Mailable
 
 
     public function build(){
-        return $this->view('services.techniciens.mail_template');
+        return $this->markdown('services.techniciens.mail_template');
     }
 
 

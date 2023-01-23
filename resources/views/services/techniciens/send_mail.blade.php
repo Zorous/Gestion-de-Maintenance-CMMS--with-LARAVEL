@@ -14,11 +14,15 @@
           <input class="form-control" name="email" placeholder="To:" value="{{ $technicien->email }}">
         </div>
         <div class="form-group">
+            <h2>Subject</h2>
           <input class="form-control" name="subject" placeholder="Subject:">
         </div>
-        <div class="form-group">
-            <textarea id="compose-textarea" name="message" class="form-control" style="height: 300px"></textarea>
         </div>
+        <div class="form-group">
+            <h2>Message</h2>
+          <input class="form-control" name="message" placeholder="message....">
+        </div>
+        
         <div class="form-group">
           <div class="btn btn-default btn-file">
             <i class="fas fa-paperclip"></i> Attachment

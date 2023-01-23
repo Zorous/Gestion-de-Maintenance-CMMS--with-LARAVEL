@@ -18,13 +18,10 @@ class EmailController extends Controller
 
     public function sendMail(Request $request){
         $subject = $request->input('subject');
-        $message = $request->input('message');
+        $urmessage = $request->input('message');
         $email = $request->input('email');
-        // dd($subject);
-
-
-        Mail::to($email)->send(new MailNotify($subject,$message));
-        // return "<h1>SendMail</h1>";
+        Mail::to($email)->send(new MailNotify($subject,$urmessage));
+        return redirect("services/techniciens");
     }
 
 }

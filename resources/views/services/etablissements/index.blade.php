@@ -63,7 +63,10 @@
            <form action="{{ route('etablissements.destroy',$etab->id) }}" method="POST">
             @csrf
             @method('DELETE')
-            <button class="btn btn-danger mb-2"><i class="fa-solid fa-trash"></i></button>
+            <button 
+            class="btn btn-danger mb-2"
+            wire:click.prevent = 'deleteConfirmation({{$etab->id}})'
+            ><i class="fa-solid fa-trash"></i></button>
          </form> </td>
         </tr>
         @endforeach

@@ -121,11 +121,13 @@
                     <!-- Sidebar user panel (optional) -->
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img src={{"/uploads/profil_imgs/".Auth::user()->image}}
-                                class="img-circle elevation-2" style="width:45px !important;height:45px !important;" alt="User Image">
+                            <img src={{ '/uploads/profil_imgs/' . Auth::user()->image }} class="img-circle elevation-2"
+                                style="width:45px !important;height:45px !important;" alt="User Image">
                         </div>
                         <div class="info nav-item">
-                           <a href="{{'/profile/'.Auth::user()->id}}" class="nav-link"><h6> {{ Auth::user()->name }}</h6></a>
+                            <a href="{{ '/profile/' . Auth::user()->id }}" class="nav-link">
+                                <h6> {{ Auth::user()->name }}</h6>
+                            </a>
                         </div>
                     </div>
 
@@ -163,15 +165,15 @@
                             </li>
                             {{-- item --}}
                             <li class="nav-item">
-                                <a href="{{route('etablissements.index')}}" class="nav-link">
+                                <a href="{{ route('etablissements.index') }}" class="nav-link">
                                     <i class="fa-solid fa-building"></i>
                                     <p>
                                         Etablissements
                                     </p>
                                 </a>
                             </li>
-                            
-                   
+
+
                             {{-- item --}}
                             <li class="nav-item">
                                 <a href="pages/widgets.html" class="nav-link">
@@ -186,9 +188,9 @@
                             {{-- item --}}
                             <li class="nav-item">
                                 <a href="{{ route('techniciens.index') }}" class="nav-link">
-                                    <i class="fa-solid fa-toolbox"></i> 
+                                    <i class="fa-solid fa-toolbox"></i>
                                     <p>
-                                       Techniciens
+                                        Techniciens
                                         <span class="right badge badge-danger">New</span>
                                     </p>
                                 </a>
@@ -217,7 +219,7 @@
         </aside>
     </div>
 
-        @yield('content')
+    @yield('content')
 
 
 
@@ -231,11 +233,27 @@
 
 
 
+    {{-- Sweet alert confirmation script --}}
+    <script>
+        window.addEventListener('show-delete-confirmation', event => {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+              Livewire.emit('deleteConfirmed')
+                }
+            })
+        })
+    </script>
 
-
-
-
-
+    {{-- sweet alert --}}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- jQuery -->
     <script src="{{ url('/plugins/jquery/jquery.min.js') }}"></script>
