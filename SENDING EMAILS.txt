@@ -1,0 +1,118 @@
+1/ In order to start sending emails, we need to make an Email Controller first
+>> php artisan make:controller EmailController
+
+2/ We create a sendMail() method in our controller and set up it's route also 
+
+3/ In LARAVEL there's already a php artisan command, which makes things a lot easier for us, we can give it any name : 
+>> php artisan make:mail MailNotify
+
+4/ you will find a new folder in the app folder called Mail ("app/Mail/MailName")
+
+5/ You will find in this file 4 predefined methods, 
+if you don't find a another pre-defined method called build, yoou can simply make it yourseld like this : 
+   public function build(){
+        return $this->view('services.email_view');
+    }
+
+//it's points to a specific view you already made
+
+
+
+6/ Go back to the mailController and add this line in the sendMail() method : 
+>> Mail::to('test@gmail.com')->send(new MailNotify());
+//the to() static method takes the email you want to send the message to as a prameter using a new MailNotify template
+
+after that import them :
+>> use App\Mail\MailNotify;
+    use Illuminate\Support\Facades\Mail;
+
+7/ till now nothing will happen because we didn't configure our Mail to send actuall emails, to do that we will need an Email Provider.
+You can use "mailtrap" as an email provider since it's so supported by LARAVEL.
+So go to it's official website : "mailtrap.io"
+Sign up and go to the inbox section, go to the "integrations" and select LARAVEL 7+
+it'w will gives up those parameters : 
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=b8e00e22408fb8
+MAIL_PASSWORD=b3f126a895a123
+MAIL_ENCRYPTION=tls
+
+we copy and paste them in our envirenement file ".env"
+we replace the old MAIL prefefined variables with those.
+
+
+8/ Now if we get back and refresh the page where we specified our MailController
+exe : "https://localhost:8000/send_mail"
+
+9/ Now our mail must be working if u check the inbox on mailtrap.
+
+10/ the next thig is we want to pass some parameters to make our email dynamic a lil
+-----a)
+you can simply pass the values u get from the mail form through the Controller to the MailNotify function like so : 
+>>     $subject = $request->input('subject');
+        $urmessage = $request->input('message');
+        $email = $request->input('email');
+        Mail::to($email)->send(new MailNotify($subject,$urmessage));
+
+
+11/ to use those variables in the MailNotify file, we will need to define them there on the __constructor like so : 
+>>  public $subject;
+    public $urmessage;
+
+    public function __construct($subject,$urmessage)
+    {    $this->subject = $subject ?? "null";
+        $this->urmessage->$urmessage ?? "null";
+
+    }
+
+12/ Now we can use them on our template view
+
+13/ To make the style of ur template view looks better there's already a predefined component in LARAVE, we could use styled buttons also
+and assign some links to the,  we can use it easily like so :
+
+=> @component('mail::message')
+<h1>Subject :  {{ $subject }}</h1>
+<h2>Message :  {{ "$urmessage" }}</h2>
+=>@component('mail::button' , ['url' => "https://www.google.com"])
+Click here
+=>@endcomponent
+=> @endcomponent
+
+14/it's will look so nice, but we will need to remove LARAVEL's logo and customize it's style, to do that
+you will need to run this command first : 
+>> php artisan vendor:publish --tag=laravel-mail
+
+then go to "resources\views\vendor\", and we will find a new vendor folder.
+there we will find all this components files.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

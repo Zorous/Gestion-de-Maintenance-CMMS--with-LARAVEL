@@ -1,0 +1,438 @@
+LARAVEL also works with the MVC system
+Model (data) -> Controller (connection) -> View (interface)
+
+1 - Download and install the "composer"
+
+2 - create a new LARAVEL Project, run your favorite terminal and locate your self on the place where u want ur project to be,
+and execute the following command : 
+>> composer create-project laravel/laravel YOUR-PROJECTS-NAME
+
+3 - launch the server, using the following command : 
+>> php artisan serve
+
+
+Understand a LARAVEL App's Structure and how things does really work on LARAVEL's official website here :
+"https://laravel.com/docs/9.x/structure"
+
+
+Just like React JS and Node JS the first thing we should start with is the routing of our application
+
+---------------------------Routes----------------------------
+To manage the application Routes on LARAVEL, there's a folder called routes in ur basic Laravel App.
+
+and inside it there's a web.php file where we will specifiy our routes, to manage the routes there's a Route class that has get as one of 
+it's STATIC FUNCTIONS we could use the get method accepts 2 parameters, the 1st parameter is the route and the 2nd is firing a function that returns another method called view,
+inside the view function we specify the file name.
+that file name must be in a view folder and that view folder exits on the ressources folder, so what the view method does
+is mapping the view folder and searching for a file with the name u gave, all the files inside this folder has a (.blade.php) extension.
+
+Blade is Template engine
+
+exe : 
+//1st step : creating a new file in ur view folder
+resources/views/contact.blade.php
+
+routes/web.php
+>> Route::get('/contact', function () {
+    return view('contact');
+     });
+
+//the view method accepts 1 parameter and another optional parameter ('VIEW NAME', [array of data])
+
+There's a second Method to do this : 
+>> Route::view('contact', "contact");
+
+//it does exactly the same thing.
+the view method accepts 2 parameters and a 3rd optional parameter on that case,
+(URL-REQUEST','VIEW NAME', [array of data])
+
+so here if we type the domain name +/contact, it will takes us to the contact page.
+
+
+------------------------Routes Requests--------------------------
+
+Inside the get static method, we can use request() it takes one parameter 
+and it's the request we add to the URL 
+exe : "localhost:8000/store?style=classic"
+>>Classic Clothes
+
+but here there's a security problem, if the user passes a javaScript code it will execute
+that's why we will use a strip_tags() predefined method.
+there's so many security methods we could use in LARAVEL
+
+exe : 
+
+>> Route::get('/store',function (){
+$filter = request('style');
+if(isset($filter)){
+	return "The selected style is ."strip_tags($filter);
+//instead of the casual concatenation, we can use another new form like that
+	return "The selected style is {strip_tags($filter)}";
+}
+else{
+return "The selected styles are all the styles";
+}
+
+})
+
+
+
+------------------------Routes Categories-------------------------
+Here instead of using the questioning mark we want it to be just like that : 
+ "localhost:8000/store/classic".
+
+>>Classic Clothes
+
+exe : 
+//here we should pass those category and item variable into our inner function, using the fct
+
+Route::get('/store/{category}/{item}', function($category , $item){
+
+})
+
+//to dont cause any errors in case we didn't provide the category or the item we add a questioning mark to make them optional, and we can add more controls inside our function.
+like that : 
+>> Route::get('/store/{category?}/{item?}', function($category , $item){
+
+if(isset($category)){
+	if(isset($item)){ return "<h1>${item}</h1>"}
+
+	return "<h1>${category}</h1>"
+}
+});
+
+
+
+------------------------Controler-------------------------
+
+In the "app/Http/Controllers/Controller.php"
+we will find a Controller class which we are supposed to inherate from it and use in for our other controllers
+but we don't do that manually
+since LARAVEL offers to us a way to do those repeatetive tasks automatically. 
+it has a commands we could use to create controllers much easier, and it's like that : 
+
+>> php artisan make:controller ControllerName
+
+//it accepts also much more additional arguments, we will check them out with the passing of time
+
+We can use new controllers to organize and split our code more efficiently.
+for example instead of this : 
+>> Route::get('/', function () {
+    return view('welcome');
+   });
+   Route::get('/contact', function () {
+    return view('contact');
+    });
+
+   Route::get('/about', function () {
+    return view('about');
+    })
+
+
+We define the function in a new controller, using that command : 
+>> php artisan make:controller StaticController
+and define the functions inside it's class : 
+"app/Http/StaticController.php"
+>> class StaticController extends Controller
+{
+    public function index(){
+        return view('welcome');
+    }
+    public function contact(){
+        return "<h1>Contact</h1>";
+    }
+    public function services(){
+        return "<h1>Services</h1>";
+    }
+}
+
+
+and the routing file becomes shorter, we can use the newly defined functions like this : 
+"routes/web.php"
+>> use App\Http\Controllers\StaticController;
+
+Route::get('/', [StaticController::class , 'index']);
+Route::get('/contact', [StaticController::class , 'contact']);
+Route::get('/about', [StaticController::class , 'about']);
+
+---------------------------Layouts----------------------------
+To be more structured and avoid the unnecessary repetitions of blocks of code on our Views folder
+we could create a new layout file in the views folder
+
+The first step :
+we will empty all of our views from all the HTML content, and only define a section where we will have a special code,
+each section has the open and close tag exe : @section('sectionName') .......................................@endsection;
+
+like that,
+exe :
+>>
+@extends('layout');
+//we inherate the layout's structure and only change where this section is called
+@section('content')
+<div>
+<h1>About</h1>
+</div>
+@endsection;
+
+To define a section that has one line of code, we could do it that way : 
+@section('title','about');
+
+the next step : 
+the layout view will have all the necessary basic HTML tags
+like <head>, <body>, and we will include inside of it all what we will need, bootstrap, jquery links etc...
+and call the special sections using @yield('sectionName');
+exe :
+<html>
+<head>...............</head>
+<body>
+@yield('content');
+</body>
+</html>
+
+
+
+-----------------------------------JS/CSS/Images-----------------------------------
+The entry point of our LARAVEL App is index.php, which exists on the public folder
+
+Just like React JS, the only folder that while be public after deploying is the public folder
+so if we want to link our style sheets and JavaScript files with any other folder the request will fail
+that's way inside our public folder we create styles and JS folder or create just an assets folder which will contain
+all the files we will need "public/assets/[styles | images | Js]", so similar to Node JS
+
+and to make a call to them, when we put an href="" , it's like automatically points to the public folder
+so to use css for example, you will need just to put it that way 
+>>href="/assets/styles/style.css"
+it will function only if we are on the home or index page
+since it will request the css file that way >> ":8000/assets/styles/style.css"
+but if we was on an about page for example it's will be >> ":8000/about/assets/styles/style.css";
+We will encounter a problem here, that's why LARAVEL or the blade engine to be more precise
+offers a methode for us and it's url()
+and we use it like that :
+>>href = "{{ url('/assets/styles/style.css') }}"
+
+
+
+-------------------------------------------Routes naming---------------------------------
+To avoid repetitions and changing the routes in more than a file
+we can make changes on a single place and it will apply to all the other places, we simply just give a naming to our
+routes and call them with that name on the other routes.
+
+- to give a name to a route, we can do it like that : 
+>> Route::get('/', [StaticController::class,'index'])->name("home.index");
+Route::get('/contact', [StaticController::class,'contact'])->name("home.contact");
+Route::get('/about', [StaticController::class,'about'])->name('home/about');
+
+to call them with those names on the navbar for example we need to do it through a route function.
+ in the href, href = {{ route('RouteName') }}
+exe : 
+>>      <div class="navbar-nav">
+            <a class="nav-item nav-link active" href={{ route('home.index') }}>Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="{{ route('home.about') }}">About</a>
+            <a class="nav-item nav-link" href="{{ route('home.contact') }}">Contact</a>
+          </div>
+
+
+---------------------------------Resources Controller-----------------------------------
+
+So as we know, dealing with databases will be always via controlers,
+we call those resources controllers, and to create one we simply type in the cmd line : 
+
+//1
+>>php artisan make:controller RessourcesController -r
+
+it will create a class with the name we have choosen and make index,create,store,show,update,destroy.. empty methods
+for us to handle them, so it saves so much time and effort.
+
+
+//2
+so now we will create our Ressources View Manually
+it's favorable to make a folder for each ressource to be more structured.
+
+also in the routing file if we want to make any interaction with our Ressource
+we will have to change the route or make a new route exe : Route::get('/resource/[ADD | DELETE | SHOW ...]');
+
+that's why LARAVEL or the Route class has another built in method called resources, and it handles all of this : 
+and we use it simply just like get : >> Route::resource('resourceName', ResourcesController::class).
+
+ it takes the index method by default, so we should have specified the view name in the index method
+"app/Http/Controllers/ResourcesController".
+
+//3
+>>  public function index()
+    {
+        //
+        return view("ResourcesFolderName.index");
+    }
+
+
+//4
+Route::resources('resourceName', ResourcesController::class)
+
+
+//5: dont forget to add the routing in the navbar too
+>>   <a class="nav-item nav-link" href="{{ route('ResourcesFolderName.index') }}">Resources</a>
+
+
+
+array_search(); takes 2 parameters, a variable where u want to store the result, and another function
+called : array_column(); which takes also 2 parameters, 1st par, is the array u want to search on, 2nd par; is the column u are searching for
+
+
+
+
+---------------------------------------------Connecting to database-----------------------------------------------------------------
+
+After launching the server on ur favorite software Xampp, Wampp etc..
+and creating the database ofcourse
+
+there's a file called .env the shortcut of enviroment in our LARAVEL project.
+there we can set our HOST, PORT, DBNAME....
+_____________Migrations_________________
+//1
+IF YOU HAVE AN EXISTING DB, U CAN SKIP THIS STEPS
+after that we need to do something called Migration,
+we open our cmd line and write this command : 
+>> php artisan make:migration create_x_table
+
+it creates a new migration files in "database/migrations/"
+
+
+//2
+the second thing is creating a model, the model's name should start with an uppercase character and not plural !
+bcs it makes it on the plural form automatically.
+
+>> php artisan make:model ModelNAme -m (or --migration)
+
+this commaned creates two files, one in the migration "database/migration/" folder and the other in 
+the Models folder on "App/http/Models/"
+on the first we will find a class with the name we have choosen +s, this class will have two methods up() for creating table and down()
+for deleting it.
+on the up() function we can precise the columns names like that : 
+
+>>     public function up()
+    {
+        Schema::create('etablissements', function (Blueprint $table) {
+            $table->id();
+            $table->string("raison social");
+            $table->string("adresse");
+            $table->string("tel");
+            $table->string("responsable");
+            $table->timestamps();
+        });
+    }
+
+
+//3
+after that we run this command :
+php artisan migrate
+
+//4 to cancel a migartion, we could use this command :
+php artisan migrate:rollback
+
+
+TO USE AN EXISTING DATABASE FOLLOW THOSE STEPS :
+//1
+php artisan make:model ModelName
+
+
+//2 Go to he model
+"app/models/Clients";
+
+
+
+class Clients extends Model
+{
+    use HasFactory;
+
+//3 : specify the table
+    protected $table = "client";
+
+//4 specify the columns
+    protected $fillable = ['nom','prenom','email'];
+
+//In case we didn't name our primary key 'id', LARAVEL will shows an error, we will need to specify it here
+// protected $primaryKey = "client_id";
+
+//5 Remove the default timestamp columns
+    public $timestamps = false;
+
+
+
+
+
+6// Create new Controller
+php artisan make:controller ClientsController
+
+}
+
+
+
+--------------------------------------Adding column is a mysql table via LARAVEL---------------------------
+//1 : Create a new migation exe :
+>>	 php artisan make:migration add_status_field_to_users
+
+//2: then go to the migartion file in "database/migration/MigrationName"
+  exe : 
+return new class extends Migration
+{
+ 
+    public function up()
+    {
+        Schema::table('users', function (Blueprint $table) {
+//3 : add the column name and make it nullable using the nullable() method, so if u have an existing fields it's wont show up an error,
+we can also select the new column's position using the after() method
+            $table->string('status')->nullable()->after('name');
+
+        });
+    }
+
+    public function down()
+    {
+        Schema::table('users', function (Blueprint $table) {
+//4: the last step is to add this line in the drop() function as well
+            $table->dropColumn(['status']);
+        });
+    }
+};
+
+//5 : check ur mysql table and u will find the new column added! ;3
+
+
+-----------------------------------------Check if the user is admin----------------------------------
+sometimes our LARAVEL App may contain 2nd Party users, that means normal users and admins, in that case we will need to check if the user is an admin or nah.
+to do that we will need something called Middlewares.
+
+//1 : we could make a Middleware easily like that : 
+>> 	php artisan make:middleware check_login
+
+
+//2 : we go to the new middleware in "app/http/Middleware/ourNewMiddleware".
+there we will find a function called handle(), there we can add new verifications, like so : 
+>>     public function handle(Request $request, Closure $next)
+    {
+     //X
+   if(auth->user()->status != "admin" || auth->user()->status != "user"){
+            Auth::logout();
+        }
+        return $next($request);
+    }
+}
+
+//3 : after we set up our middle ware we will need to save in a file where all our application Middlewares exist.
+it's called Kernel.php
+it has a class calle Kernel also and it contains 3 predefined tables. we will need the one called "$routeMiddleware"
+there we will add our new Middleware on key:value pair, OurMiddleware'sName => OurMiddlewaresPath::class()
+
+//it still wont filter our users, bcs we need to go to the .web file where we have all our routes and we add our middleware like so : 
+
+
+
+
+
+
+
+
+
+
+
+

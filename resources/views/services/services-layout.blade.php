@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GMAO - @yield('title')</title>
+    <title>GMAO | CMMS - @yield('title')</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -119,16 +119,16 @@
             <!-- Main Sidebar Container -->
             <aside class="main-sidebar sidebar-dark-primary elevation-4 sidebar-no-expand">
                 <!-- Brand Logo -->
-                <a href="/" class="brand-link" style="background:rgba(0,0,0,0.6);color:#fff;">
-                    <i class="fa fa-line-chart"></i>
-                    <span class="brand-text font-weight-light">Gestion de maintenance</span>
-                </a>
+                <a href="/" class="brand-link" style="background:rgba(0,0,0,0.6);color:#fff;height:4em;padding-top:25px;">
+                  <div style="display: flex;"><h3> <i class="fa fa-line-chart"></i></h3>
+                   &nbsp; <span class="brand-text font-weight-light">Gestion de maintenance</span>
+               </div>  </a>
 
 
                 <!-- Sidebar -->
                 <div class="sidebar">
                     <!-- Sidebar user panel (optional) -->
-                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="user-panel mt-5 pb-3 mb-3 d-flex" style="background: #fff;margin:-10px;padding-top:15px;">
                         <div class="image">
                             <img src={{ '/uploads/profil_imgs/' . Auth::user()->image }} class="img-circle elevation-2"
                                 style="width:45px !important;height:45px !important;" alt="User Image">
@@ -439,7 +439,9 @@
 
     <!-- jQuery -->
     <script src="{{ url('/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- jQuery UI 1.11.4 -->
+    <!-- jQuery UI -->
+<script src="{{ url('/plugins/jquery-ui/jquery-ui.min.js')}} "></script>
+<!-- jQuery UI 1.11.4 -->
     <script src="{{ url('/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
