@@ -25,6 +25,28 @@ content:"" !important;
 }
 
 
+
+/*__________________COPY,CSV,PDF...Buttons__________________*/
+.dt-buttons{
+    margin-left:2em;
+}
+.dt-buttons .buttons-pdf:hover{
+    background-color: crimson;
+}
+.dt-buttons .buttons-excel:hover{
+    background-color: green;
+}
+.dt-buttons .buttons-print:hover{
+    background-color: lightblue;
+}
+.dt-buttons .buttons-csv:hover{
+    background-color: green;
+}
+
+
+
+
+
 /*___________________Forms style__________________*/
 form{
     border: 1px solid #fff;
@@ -63,6 +85,19 @@ h1{
    /* color: #56CCF2 ; */
    font-weight: 700;
 }
+
+
+
+
+
+
+/*________________________Small boxes style_____________________*/
+.small-box{
+    height: 15em;
+    margin: 2em;
+}
+
+
 
 
 /*________________________Tables style_____________________*/

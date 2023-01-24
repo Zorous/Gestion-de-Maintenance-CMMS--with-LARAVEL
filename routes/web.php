@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CalendersController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\EquipementsController;
 use App\Http\Controllers\ProfileController;
@@ -52,6 +53,8 @@ Route::resource('etablissements',EtablissementController::class);
 //Techniciens
 Route::resource('techniciens',TechnicienController::class);
 
+//Calender
+Route::resource('calender',CalendersController::class);
 
 });
 
@@ -59,3 +62,11 @@ Route::resource('techniciens',TechnicienController::class);
 Route::get('/services/technicien/mailForm/{id}',[EmailController::class,"mailForm"]);
 Route::get('/services/technicien/sendMail',[EmailController::class,"sendMail"]);
 
+
+
+
+
+
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});
