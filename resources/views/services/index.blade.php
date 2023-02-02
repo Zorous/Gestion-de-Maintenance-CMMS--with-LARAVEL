@@ -18,7 +18,7 @@
                             <div class="inner">
                                 <h3> <i class="fa-solid fa-screwdriver-wrench"></i> Equipements</h3>
 
-                                <h4>20</h4>
+                                <h4>{{$Count_Equipement}}</h4>
                             </div>
                             <div class="icon">
                                 <i class="fa-solid fa-screwdriver-wrench"></i>
@@ -33,7 +33,7 @@
                         <div class="small-box bg-success">
                             <div class="inner">
                                 <h3><i class="fa-solid fa-list-check"></i> Taches</h3>
-                                <h4>5</h4>
+                                <h4>{{ $Count_Taches }}</h4>
                             </div>
                             <div class="icon">
                                 <i class="fa-solid fa-list-check"></i>
@@ -49,7 +49,8 @@
                             <div class="inner">
                                 <h3><i class="fa-solid fa-building"></i> Etablissements</h3>
 
-                                <h4>12</h4>
+                                <h4>{{ $Count_Etablissement }}</h4>
+
                             </div>
                             <div class="icon">
                                 <i class="fa-solid fa-building"></i>
@@ -65,7 +66,7 @@
                             <div class="inner">
                                 <h3><i class="fa-solid fa-toolbox"></i> Techniciens</h3>
 
-                                <h4>11</h4>
+                                <h4>{{ $Count_Techniciens }}</h4>
                             </div>
                             <div class="icon">
                                 <i class="fa-solid fa-toolbox"></i>

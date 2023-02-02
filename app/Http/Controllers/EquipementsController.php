@@ -44,8 +44,8 @@ class EquipementsController extends Controller
         $Equipement->prix = $request->input("prix");
         $Equipement->marque = $request->input("marque");
         $Equipement->categorie_id = $request->input("category");
-        $Equipement->service_id  = $request->input("service");
-        $Equipement->piece_de_rechange  = $request->input("piece_de_rechange");
+        $Equipement->service_id = $request->input("service");
+        $Equipement->piece_de_rechange = $request->input("piece_de_rechange");
 
         //Image Treatment
         if ($request->hasFile('image')) {
@@ -72,7 +72,7 @@ class EquipementsController extends Controller
             $Equipement->document = "";
         }
 
-      $my_checkbox_value = $request['piece_rechange'];
+        $my_checkbox_value = $request['piece_rechange'];
 
         if ($my_checkbox_value == 1) {
             //checked
@@ -99,20 +99,82 @@ class EquipementsController extends Controller
 
     public function edit($id)
     {
-         $categories = Categorie::all();
+        $categories = Categorie::all();
         $services = Service::all();
 
         $equipement = Equipement::find($id);
-        return view('services.equipments.update',
-        [
-        "id"=>$id,
-        "equipements"=>$equipement,
-        "categories"=>$categories,
-        "services"=>$services]);
+        return view(
+            'services.equipments.update',
+            [
+                "id" => $id,
+                "equipements" => $equipement,
+                "categories" => $categories,
+                "services" => $services
+            ]
+        );
     }
 
     public function update(Request $request, $id)
     {
+        $Equipement = Equipement;
+
+        $Equipement->description = $request->input("description");
+        $Equipement->designation = $request->input("designation");
+        $Equipement->reference = $request->input("reference");
+        $Equipement->date_debut = $request->input("date");
+        $Equipement->prix = $request->input("prix");
+        $Equipement->marque = $request->input("marque");
+        $Equipement->categorie_id = $request->input("category");
+        $Equipement->service_id = $request->input("service");
+        $Equipement->piece_de_rechange = $request->input("piece_de_rechange");
+
+        //Image Treatment
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . "." . $extension;
+            $file->move('uploads/equipements_imgs', $filename);
+            $Equipement->image = $filename;
+        } else {
+            // return $request;
+            $Equipement->image = "";
+        }
+
+        //Document treatment
+
+        if ($request->hasFile('doc')) {
+            $Docfile = $request->file('doc');
+            $Docextension = $Docfile->getClientOriginalExtension();
+            $Docfilename = time() . "." . $Docextension;
+            $Docfile->move('uploads/equipements_docs', $Docfilename);
+            $Equipement->document = $Docfilename;
+        } else {
+            // return $request;
+            $Equipement->document = "";
+        }
+
+        $my_checkbox_value = $request['piece_rechange'];
+
+        if ($my_checkbox_value == 1) {
+            //checked
+            $Equipement->piece_de_rechange = 1;
+
+        } else {
+            //unchecked
+            $Equipement->piece_de_rechange = 0;
+
+        }
+
+        $Equipement->update();
+        return redirect('services/equipements');
+
+
+
+
+
+
+
+
 
     }
 

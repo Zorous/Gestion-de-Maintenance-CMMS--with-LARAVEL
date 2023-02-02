@@ -1,6 +1,6 @@
 
 
-@extends('services.services-layout');
+@extends('layouts.services-layout');
 
 
 @section('content')
@@ -63,7 +63,7 @@
             <label for="piece_rechange">est une piéce de rechange : </label>
         </div>
 </div>
-        <button type="submit" class="btn btn-success">+ Modifier ce element</button>
+        <button type="submit" class="btn btn-success"> Modifier </button>
     </div></form>
 </div>
 @endsection

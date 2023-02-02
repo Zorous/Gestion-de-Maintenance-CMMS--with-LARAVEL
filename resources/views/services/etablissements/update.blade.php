@@ -1,6 +1,6 @@
 
 
-@extends('services.services-layout');
+@extends('layouts.services-layout');
 
 
 @section('content')

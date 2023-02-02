@@ -1,6 +1,6 @@
 
 
-@extends('services.services-layout');
+@extends('layouts.services-layout');
 
 
 @section('content')
@@ -8,6 +8,7 @@
     <h1 class="m-5">Ajouter une établissements</h1>
 <form action="{{route('etablissements.store')}}" method="POST" enctype="multipart/form-data">
 @csrf
+
     <div class="form-group">
       <label for="raison">Raison Social</label>
       <input type="text" class="form-control" name="raison-social" id="raison" aria-describedby="emailHelp" placeholder="(raison social)">
