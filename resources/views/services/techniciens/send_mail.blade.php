@@ -1,4 +1,4 @@
-@extends('services.services-layout')
+@extends('layouts.services-layout');
 
 @section('content')
 <div class="col-md-9 m-5" style="margin:10vw !important;">
