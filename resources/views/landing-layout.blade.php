@@ -87,7 +87,7 @@ https://templatemo.com/tm-538-digital-trend
                         <div class="col-lg-6 col-12">
                           <div class="hero-image" data-aos="fade-up" data-aos-delay="300">
 
-                            <img src="{{url('/assets/images/working-girl.png')}}" class="img-fluid" alt="working girl">
+                            <img src="{{url('/assets/images/banner-img.png')}}" class="img-fluid" alt="working girl">
                           </div>
                         </div>
 

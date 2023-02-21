@@ -19,7 +19,7 @@ class EtablissementController extends Controller
         $this->middleware('auth');
 
         $Etablissements = Etablissement::all();
-        return view("services.etablissements.index",["etabs"=>$Etablissements]);
+        return view("services.etablissements.index", ["etabs" => $Etablissements]);
     }
 
     public function create()
@@ -52,7 +52,7 @@ class EtablissementController extends Controller
     public function edit($id)
     {
         $Etablissement = Etablissement::find($id);
-        return view("services/etablissements/update",["id"=>$id,"etab"=>$Etablissement]);
+        return view("services/etablissements/update", ["id" => $id, "etab" => $Etablissement]);
 
     }
 
@@ -60,22 +60,20 @@ class EtablissementController extends Controller
     {
         $Etab = Etablissement::find($id);
 
-if(isset($Etab)){
-        $Etab->raison_social = $request->input("raison-social");
-        $Etab->adresse = $request->input("adresse");
-        $Etab->telephone = $request->input("tele");
-        $Etab->responsable = $request->input("responsable");
+        if (isset($Etab)) {
+            $Etab->raison_social = $request->input("raison-social");
+            $Etab->adresse = $request->input("adresse");
+            $Etab->telephone = $request->input("tele");
+            $Etab->responsable = $request->input("responsable");
 
 
-        $Etab->update();
-        return redirect('/services/etablissements');
+            $Etab->update();
+            return redirect('/services/etablissements');
 
-}
+        } else {
+            echo "error";
 
-else{
-echo "error";
-
-}
+        }
 
 
     }

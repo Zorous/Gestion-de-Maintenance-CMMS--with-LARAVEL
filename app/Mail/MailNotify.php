@@ -26,6 +26,7 @@ class MailNotify extends Mailable
     public function envelope()
     {
         return new Envelope(
+            from : "Oussama Belhadi",
             subject: $this->subject,
         );
     }
