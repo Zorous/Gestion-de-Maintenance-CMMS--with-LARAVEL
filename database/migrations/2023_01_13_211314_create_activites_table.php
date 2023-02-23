@@ -21,9 +21,11 @@ return new class extends Migration
         $table->unsignedBigInteger('tache_id');
         $table->foreign('tache_id')->references('id')->on('taches');
         $table->unsignedBigInteger('technicien_id');
-        $table->foreign('technicien_id')->references('id')->on('techniciens');
+        $table->foreign('technicien_id')->references('id')->on('techniciens')->onUpdate('cascade')
+        ->onDelete('cascade');
         $table->unsignedBigInteger('etat_id');
-        $table->foreign('etat_id')->references('id')->on('etats');
+        $table->foreign('etat_id')->references('id')->on('etats')->onUpdate('cascade')
+        ->onDelete('cascade');
         $table->timestamps();
         });
     }

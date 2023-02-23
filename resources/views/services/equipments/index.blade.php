@@ -39,8 +39,8 @@
   <div class="card-body">
     <h5 class="card-title">{{$equipment->designation}}</h5>
     <p class="card-text">{{$equipment->description}}</p>
-    <a href="#" class="btn btn-small btn-primary">Détaills</a>
-    <a href="{{ route('equipements.edit',$equipment->id) }}"><button class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button></a>
+    <a href={{route("equipements.details",$equipment->id)}} class="btn btn-small btn-primary">Détaills</a>
+    <a href="{{ route('equipements.edit',$equipment->id)}}"><button class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button></a>
     <form action="{{ route('equipements.destroy',$equipment->id) }}" method="post">
         @csrf
         @method('DELETE')

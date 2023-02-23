@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string("telephone",100);
             $table->string("email",100);
             $table->unsignedBigInteger("specialite_id");
-            $table->foreign('specialite_id')->references('id')->on('specialites');
+            $table->foreign('specialite_id')->references('id')->on('specialites')->onUpdate('cascade')
+            ->onDelete('cascade');
 
             $table->timestamps();
         });

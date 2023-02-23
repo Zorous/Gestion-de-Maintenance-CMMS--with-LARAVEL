@@ -26,6 +26,9 @@ class Equipement extends Model
     ];
 
     public function category(){
-        return $this->belongsTo(Categorie::class);
+        return $this->belongsTo(Categorie::class,'categorie_id', 'id');
+    }
+    public function service(){
+        return $this->belongsTo(Service::class);
     }
 }

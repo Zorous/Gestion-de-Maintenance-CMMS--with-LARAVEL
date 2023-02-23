@@ -58,7 +58,7 @@ form{
 .form-group{
     border-bottom: 1px dashed #fff;
     padding-bottom: 20px;
-   
+
 }
 input{
     width: 20em !important;
@@ -78,6 +78,38 @@ td form,.card form{
     padding: 0px;
     margin: 0px;
 }
+
+.line-clamp{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 250px;
+    display: block;
+    overflow: hidden
+}
+
+.details{
+    margin-top:10vh !important;
+}
+
+.text-secondary, .text-secondary-hover:hover {
+    color: #59b73f !important;
+}
+.display-25 {
+    font-size: 1.4rem;
+}
+
+.text-primary, .text-primary-hover:hover {
+    color: #ff712a !important;
+}
+
+p {
+    margin: 0 0 20px;
+}
+
+.mb-1-6, .my-1-6 {
+    margin-bottom: 1.6rem;
+}
+
 
 
 /*________________________Title's style_____________________*/

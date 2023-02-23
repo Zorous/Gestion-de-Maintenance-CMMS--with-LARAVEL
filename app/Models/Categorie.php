@@ -19,9 +19,9 @@ protected $fillable=[
 
 
 
-public function equipements(){
-    return $this->hasMany(Equipement::class, 'categorie_id', 'id');
-}
+// public function equipements(){
+//     return $this->belongsTo(Equipement::class, 'categorie_id', 'id');
+// }
 
 
 }

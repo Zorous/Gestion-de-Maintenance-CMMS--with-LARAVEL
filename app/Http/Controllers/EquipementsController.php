@@ -20,8 +20,9 @@ class EquipementsController extends Controller
         // return view('services.equipments.index', compact('equipments','categories'));
 
         //SELECT * FROM category,equipement WHERE categorie
-        $equipements2 = DB::table('equipements')->join('categories', 'categories.id', "=", "equipements.categorie_id")->get();
-        return view('services.equipments.index', ['equipments' => $equipements2]);
+        $equipments= DB::table('equipements')->join('categories', 'categories.id', "=", "equipements.categorie_id")->get();
+        // return $equipements[0]->id;
+        return view('services.equipments.index',compact("equipments"));
     }
 
     public function create()
@@ -30,6 +31,15 @@ class EquipementsController extends Controller
         $services = Service::all();
 
         return view('services.equipments.create', ["categories" => $categories, "services" => $services]);
+    }
+
+    public function description($id){
+        // $categorie = Categorie::all();
+        // $services = Service::all();
+        $equipment = Equipement::find($id);
+        // return($equipment->image);
+
+       return view('services.equipments.details',compact('equipment'));
     }
 
 
@@ -103,11 +113,14 @@ class EquipementsController extends Controller
         $services = Service::all();
 
         $equipement = Equipement::find($id);
+
+        // dd($equipement);
+
         return view(
             'services.equipments.update',
             [
                 "id" => $id,
-                "equipements" => $equipement,
+                "equipement" => $equipement,
                 "categories" => $categories,
                 "services" => $services
             ]

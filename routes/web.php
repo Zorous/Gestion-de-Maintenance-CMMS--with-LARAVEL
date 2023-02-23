@@ -49,6 +49,7 @@ Route::resource('taches',TachesController::class);
 
 //Equipements
 Route::resource('equipements',EquipementsController::class);
+Route::get('/equipements/details/{id}',[EquipementsController::class,"description"])->name('equipements.details');
 
 //Etablissements
 Route::resource('etablissements',EtablissementController::class);

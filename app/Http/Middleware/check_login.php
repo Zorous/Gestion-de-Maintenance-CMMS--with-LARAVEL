@@ -22,6 +22,6 @@ class check_login
         else{
             return redirect('/login')->with('message','login to access the applicaion\'s features');
         }
-        return $next($request);
+        // return $next($request);
     }
 }

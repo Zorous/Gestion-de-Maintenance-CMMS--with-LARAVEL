@@ -17,9 +17,11 @@ return new class extends Migration
             $table->id();
             $table->double("qte");
             $table->unsignedBigInteger("activite_id");
-            $table->foreign('activite_id')->references('id')->on('activites');
+            $table->foreign('activite_id')->references('id')->on('activites')->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->unsignedBigInteger("equipement_id");
-            $table->foreign('equipement_id')->references('id')->on('equipements');
+            $table->foreign('equipement_id')->references('id')->on('equipements')->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }
