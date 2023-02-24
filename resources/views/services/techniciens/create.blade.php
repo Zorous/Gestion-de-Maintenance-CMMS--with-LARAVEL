@@ -8,22 +8,20 @@
     <h1 class="m-5">Ajouter un Technicien</h1>
 <form action="{{route('techniciens.store')}}" method="POST" enctype="multipart/form-data">
 @csrf
-    <div class="form-group">
-      <label for="nom">Nom</label>
-      <input type="text" class="form-control" name="nom" id="nom" >
-    </div>
-
-    <div class="form-group">
-      <label for="prenom">Prenom</label>
-      <input type="text" class="form-control" name="prenom" id="prenom" >
-    </div>
+   
+  
     <div class="form-group">
       <label for="tele">Numero de Télephone</label>
       <input type="text" class="form-control" name="tele" id="tele" >
     </div>
+  
     <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" class="form-control" name="email" id="email" >
+      <label for="user_id">User </label>
+      <select  name="user_id" id="user_id">
+        @foreach($users as $user)
+        <option value={{$user->id}}>{{$user->name}}</option>
+        @endforeach
+      </select>
     </div>
     <div class="form-group">
       <label for="specialites">Spécialités</label>
@@ -34,7 +32,9 @@
       </select>
     </div>
     <div class="form-group">
-      <label for="image">Image</label>
+      <label for="image">Image</label><br>
+      <small style="color:yellow">[Champ facultative]</small>
+
       <input type="file" class="form-control" name="image" id="image" >
     </div>
 

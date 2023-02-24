@@ -34,19 +34,21 @@
         <div class="col col-sm-12 col-md-6">
 {{-- <h1>{{print_r($equipments)}}</h1> --}}
 
-<div class="card m-5" style="width: 18rem;">
+<div class="card p-3" style="width:20rem;">
   <img class="card-img-top" src={{url('uploads/equipements_imgs/'.$equipment->image)}} width="300px" height="300px" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title">{{$equipment->designation}}</h5>
-    <p class="card-text">{{$equipment->description}}</p>
+    <p class="card-text line-clamp">{{$equipment->description}}</p>
+    <div  style="display:flex;">
     <a href={{route("equipements.details",$equipment->id)}} class="btn btn-small btn-primary">Détaills</a>
-    <a href="{{ route('equipements.edit',$equipment->id)}}"><button class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button></a>
+    <a href="{{ route('equipements.edit',$equipment->id)}}"><button class="btn btn-warning mr-3 ml-3"><i class="fa-solid fa-pen-to-square"></i></button></a>
     <form action="{{ route('equipements.destroy',$equipment->id) }}" method="post">
         @csrf
         @method('DELETE')
      <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
 
     </form>
+</div>
   </div>
 </div>
 

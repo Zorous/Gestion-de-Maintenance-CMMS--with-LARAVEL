@@ -19,11 +19,11 @@
                     <div class="card-body box-profile">
                       <div class="text-center">
                         <img class="profile-user-img img-fluid img-circle"
-                             src="{{ url('/uploads/techniciens_imgs/'.$tech->image) }}"
+                             src='{{ url("/uploads/techniciens_imgs/$tech->image")}}'
                              alt="User profile picture">
                       </div>
 
-                      <h3 class="profile-username text-center">{{ $tech->nom." ".$tech->prenom}}</h3>
+                      <h3 class="profile-username text-center">{{ $tech->name}}</h3>
 
                       <p class="text-muted text-center">{{ $tech->specialite }}</p>
 

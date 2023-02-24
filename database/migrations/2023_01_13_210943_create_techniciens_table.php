@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('techniciens', function (Blueprint $table) {
             $table->id();
-            $table->string("nom",100);
-            $table->string("prenom",100);
             $table->string("telephone",100);
-            $table->string("email",100);
             $table->unsignedBigInteger("specialite_id");
             $table->foreign('specialite_id')->references('id')->on('specialites')->onUpdate('cascade')
+            ->onDelete('cascade');
+            $table->unsignedBigInteger("user_id");
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')
             ->onDelete('cascade');
 
             $table->timestamps();

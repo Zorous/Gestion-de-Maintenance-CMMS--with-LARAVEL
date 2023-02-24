@@ -21,7 +21,6 @@ class EquipementsController extends Controller
 
         //SELECT * FROM category,equipement WHERE categorie
         $equipments= DB::table('equipements')->join('categories', 'categories.id', "=", "equipements.categorie_id")->get();
-        // return $equipements[0]->id;
         return view('services.equipments.index',compact("equipments"));
     }
 
@@ -34,12 +33,15 @@ class EquipementsController extends Controller
     }
 
     public function description($id){
-        // $categorie = Categorie::all();
-        // $services = Service::all();
-        $equipment = Equipement::find($id);
-        // return($equipment->image);
 
-       return view('services.equipments.details',compact('equipment'));
+        $equipment = Equipement::find($id);
+
+        $categorie = Categorie::where("id","=",$equipment->categorie_id);
+        $service = Service::where("id","=",$equipment->service_id);
+
+        // return($categorie);
+
+       return view('services.equipments.details',compact('equipment','categorie','service'));
     }
 
 
