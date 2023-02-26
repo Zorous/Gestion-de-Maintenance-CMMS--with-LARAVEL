@@ -47,6 +47,24 @@ class EquipementsController extends Controller
 
     public function store(Request $request)
     {
+
+
+
+        $request->validate(
+            [
+                "designation" => "required",
+                "reference" => "required",
+                "date" => "required",
+                "prix" => "required",
+                "marque" => "required",
+                "category" => "required",
+                "service" => "required",
+                "doc" => "max:2048",
+                "description" => "required",
+                "image" => "image|mimes:jpg,png,jpeg,gif,svg|max:2048"
+            ]
+        );
+
         $Equipement = new Equipement;
 
         $Equipement->description = $request->input("description");
@@ -131,7 +149,21 @@ class EquipementsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $Equipement = Equipement;
+        $request->validate(
+            [
+                "designation" => "required",
+                "reference" => "required",
+                "date" => "required",
+                "prix" => "required",
+                "marque" => "required",
+                "category" => "required",
+                "service" => "required",
+                "doc" => "required",
+                "description" => "required",
+                "image" => "image|mimes:jpg,png,jpeg,gif,svg|max:2048"
+            ]
+        );
+        $Equipement = Equipement::find($id);
 
         $Equipement->description = $request->input("description");
         $Equipement->designation = $request->input("designation");
@@ -184,22 +216,16 @@ class EquipementsController extends Controller
         return redirect('services/equipements');
 
 
-
-
-
-
-
-
-
     }
 
     public function destroy($id)
     {
 
+        // dd($id);
         $Equipement = Equipement::find($id);
         // dd($Equipement);
         $Equipement->delete();
 
-        return redirect('services/equipments');
+        return redirect()->route('equipements.index')->with('success',"l'element a éte supprimer avec succeés");
     }
 }

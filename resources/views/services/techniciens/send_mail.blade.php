@@ -11,7 +11,7 @@
       <!-- /.card-header -->
       <div class="card-body">
         <div class="form-group">
-          <input class="form-control" name="email" placeholder="To:" value="{{ $technicien->email }}">
+          <input class="form-control" name="email" placeholder="To:" value="{{ $user->email }}">
         </div>
         <div class="form-group">
             <h2>Subject</h2>
@@ -22,7 +22,7 @@
             <h2>Message</h2>
           <input class="form-control" name="message" placeholder="message....">
         </div>
-        
+
         <div class="form-group">
           <div class="btn btn-default btn-file">
             <i class="fas fa-paperclip"></i> Attachment

@@ -42,7 +42,7 @@
     <div  style="display:flex;">
     <a href={{route("equipements.details",$equipment->id)}} class="btn btn-small btn-primary">Détaills</a>
     <a href="{{ route('equipements.edit',$equipment->id)}}"><button class="btn btn-warning mr-3 ml-3"><i class="fa-solid fa-pen-to-square"></i></button></a>
-    <form action="{{ route('equipements.destroy',$equipment->id) }}" method="post">
+    <form onsubmit="confirm('êtes-vous sûr de vouloir supprimer cet élément')" action="{{ route('equipements.destroy',$equipment->id) }}" method="post">
         @csrf
         @method('DELETE')
      <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>

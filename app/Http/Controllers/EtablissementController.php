@@ -18,7 +18,7 @@ class EtablissementController extends Controller
     {
         $this->middleware('auth');
 
-        $Etablissements = Etablissement::all();
+        $Etablissements = Etablissement::paginate(10);
         return view("services.etablissements.index", ["etabs" => $Etablissements]);
     }
 

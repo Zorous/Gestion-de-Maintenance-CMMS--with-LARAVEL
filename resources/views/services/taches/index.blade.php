@@ -61,7 +61,7 @@
           <td style="display:flex;">
            <a href="{{ route('taches.edit',$tache->id) }}">
             <button class="btn btn-warning mr-2"><i class="fa-solid fa-pen-to-square"></i></button></a>
-             <form method="post" action="{{ route('taches.destroy', $tache->id) }}">
+             <form onsubmit="confirm('êtes-vous sûr de vouloir supprimer cet élément')" method="post" action="{{ route('taches.destroy', $tache->id) }}">
                 @csrf
                 @method('DELETE')
                  <button type="submit" class="btn btn-danger mb-2"><i class="fa-solid fa-trash"></i></button>

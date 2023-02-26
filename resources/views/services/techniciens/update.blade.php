@@ -5,23 +5,20 @@
 
 @section('content')
 <div class="container mt-5 p-5" style="margin-left:10vw;">
-    <h1 class="m-5">Ajouter un Technicien</h1>
-<form action="{{route('techniciens.store')}}" method="POST" enctype="multipart/form-data">
-@csrf
+    <h1 class="m-5">Modifier ce Technicien</h1>
+<form action="{{route('techniciens.update',$id)}}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
 
 
     <div class="form-group">
       <label for="tele">Numero de Télephone</label>
-      <input type="text" class="form-control" name="tele" id="tele" >
+      <input type="text" class="form-control" value="{{$techniciens->telephone}}" name="tele" id="tele" >
     </div>
 
     <div class="form-group">
       <label for="user_id">User </label>
-      <select  class="form-control"   name="user_id" id="user_id">
-        @foreach($users as $user)
-        <option value={{$user->id}}>{{$user->name}}</option>
-        @endforeach
-      </select>
+<input type="text"  class="form-control"  value="{{$techniciens->name}}" disabled>
     </div>
     <div class="form-group">
       <label for="specialites">Spécialités</label>
@@ -39,7 +36,7 @@
     </div>
 
 
-    <button type="submit" class="btn btn-success">+ Ajouter</button>
+    <button type="submit" class="btn btn-warning"> Update</button>
   </form>
 </div>
 @endsection

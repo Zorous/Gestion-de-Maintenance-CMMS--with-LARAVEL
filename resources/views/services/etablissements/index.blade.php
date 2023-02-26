@@ -60,10 +60,10 @@
           <td>{{$etab->responsable}}</td>
           <td>
            <a href="{{ route('etablissements.edit',$etab->id) }}"><button class="btn btn-warning mb-2"><i class="fa-solid fa-pen-to-square"></i></button></a>
-           <form action="{{ route('etablissements.destroy',$etab->id) }}" method="POST">
+           <form onsubmit="confirm('êtes-vous sûr de vouloir supprimer cet élément')" action="{{ route('etablissements.destroy',$etab->id) }}" method="POST">
             @csrf
             @method('DELETE')
-            <button 
+            <button
             class="btn btn-danger mb-2"
             wire:click.prevent = 'deleteConfirmation({{$etab->id}})'
             ><i class="fa-solid fa-trash"></i></button>

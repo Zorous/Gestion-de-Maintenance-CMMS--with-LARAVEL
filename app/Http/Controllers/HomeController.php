@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activite;
+use App\Models\Tache;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -16,7 +17,8 @@ class HomeController extends Controller
 
     public function index()
     {
-        $activites = Activite::all();
+        // $activites = Activite::all();
+        // $taches = Tache::;
         return view('home');
     }
 }

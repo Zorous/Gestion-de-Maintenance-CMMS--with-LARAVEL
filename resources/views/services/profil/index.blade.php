@@ -36,7 +36,7 @@
                         <h5 class="widget-user-desc text-right">Admin</h5>
                       </div>
                       <div class="widget-user-image">
-                        <img class="img-circle" src="{{url('/uploads/profil_imgs/'.$profile->image)}}" alt="User Avatar">
+                        <img class="img-circle" src='{{url("/uploads/profil_imgs/$profile->image")}}' alt="{{$profile->image}}">
                         <a href={{"/profile/".$profile->id."/edit"}} class="btn btn-warning" style="border-radius:120px;"><i class="fa-solid fa-user-pen"></i></a>
                       </div>
                       <div class="card-footer">
