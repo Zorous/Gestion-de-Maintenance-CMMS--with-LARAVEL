@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activite;
+use App\Models\Etat;
 use App\Models\Tache;
+use App\Models\Technicien;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
@@ -20,7 +22,13 @@ class ActiviteController extends Controller
     public function index()
     {
         // $activites = Activite::all();
-        $activites  = DB::table('activites')->join('taches', "taches.id", "=","activites.tache_id")->join('techniciens','techniciens.id','=','activites.technicien_id')->join('etats','etats.id','=','activites.etat_id')->get();
+        $activites  = DB::table('activites')
+        ->join('etats','etats.id','=','activites.etat_id')
+        ->join('techniciens','techniciens.id','=','activites.technicien_id')
+        ->join('taches', "taches.id", "=","activites.tache_id")
+        ->select('etats.*', 'taches.*','techniciens.*','activites.*')
+        ->get();
+        // return($activites);
 
         return view('services.activite.index',compact('activites'));
     }
@@ -32,9 +40,15 @@ class ActiviteController extends Controller
      */
     public function create()
     {
-        $users = User::where('status', "=", 0)->get();
         $taches = Tache::all();
-        return view('services.activite.create',compact('users','taches'));
+        $techniciens = DB::table('techniciens')
+        ->join('users','users.id','=','techniciens.user_id')
+        ->select('users.*', 'techniciens.*')
+        ->get();
+
+
+        // return $techniciens;
+        return view('services.activite.create',compact('techniciens','taches'));
     }
 
     /**
@@ -53,13 +67,13 @@ class ActiviteController extends Controller
                 "date" => "required",
                 "tache_id" => "required",
             ]
-        );  
+        );
         // dd('here');
         $activite = new Activite;
-        
 
 
-        $activite->description = $request->description;
+
+        $activite->description_activite = $request->description;
         $activite->duree = $request->duree;
         $activite->technicien_id = $request->technicien_id;
         $activite->date = $request->date;
@@ -75,15 +89,8 @@ class ActiviteController extends Controller
         //     "date" => $request->date
         //     ]
         // );
-        return redirect()->route("activite.index");
+        return redirect()->route("activites.index")->with('success',"l'element a éte ajouter avec succées");
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
@@ -97,7 +104,27 @@ class ActiviteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $taches = Tache::all();
+        $etats = Etat::all();
+        $techniciens = DB::table('techniciens')
+        ->join('users','users.id','=','techniciens.user_id')
+        ->select('users.*', 'techniciens.*')
+        ->get();
+
+        $activite  = DB::table('activites')
+        ->join('techniciens','techniciens.id','=','activites.technicien_id')
+        ->join('taches', "taches.id", "=","activites.tache_id")
+        ->where('activites.id',"=",$id)
+        ->select('taches.*','techniciens.*','activites.*')
+        ->first();
+
+        $technicien = DB::table('techniciens')
+        ->join('users','users.id','=','techniciens.user_id')
+        ->select('users.*', 'techniciens.*')
+        ->where('techniciens.user_id','=',$id)
+        ->first();
+        // return $technicien;
+        return view("services.activite.update",compact('id','taches','technicien','techniciens','etats',"activite"));
     }
 
     /**
@@ -109,7 +136,28 @@ class ActiviteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate(
+            [
+                "description" => "required",
+                "duree" => "required",
+                "technicien_id" => "required",
+                "date" => "required",
+                "tache_id" => "required",
+            ]
+        );
+        $activite = Activite::find($id);
+
+        $activite->description_activite = $request->description;
+        $activite->duree = $request->duree;
+        $activite->technicien_id = $request->technicien_id;
+        $activite->date = $request->date;
+        $activite->tache_id = $request->tache_id;
+        $activite->etat_id = $request->etat_id;
+
+        $activite->update();
+        return redirect()->route("activites.index")->with('success',"l'element a éte modifié avec succées");
+
+
     }
 
     /**
@@ -120,6 +168,12 @@ class ActiviteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $activite = Activite::find($id);
+        $activite->delete();
+
+        return redirect()->route("activites.index")->with('success',"l'element a éte supprimer avec succées");
+
+
+
     }
 }

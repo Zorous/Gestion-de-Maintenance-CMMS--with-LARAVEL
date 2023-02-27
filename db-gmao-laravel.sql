@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Feb 23, 2023 at 04:23 PM
+-- Generation Time: Feb 27, 2023 at 06:42 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -29,15 +29,24 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `activites` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description_activite` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `date` date NOT NULL,
   `duree` double NOT NULL,
   `tache_id` bigint(20) UNSIGNED NOT NULL,
   `technicien_id` bigint(20) UNSIGNED NOT NULL,
-  `etat_id` bigint(20) UNSIGNED NOT NULL,
+  `etat_id` bigint(20) UNSIGNED NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `activites`
+--
+
+INSERT INTO `activites` (`id`, `description_activite`, `date`, `duree`, `tache_id`, `technicien_id`, `etat_id`, `created_at`, `updated_at`) VALUES
+(11, 'Activite2', '2023-02-21', 60, 7, 15, 5, NULL, NULL),
+(21, 'Activite 3', '2023-02-08', 20, 1, 12, 1, NULL, NULL),
+(26, 'optimize your routing code(2/3)', '2023-02-17', 18, 4, 14, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -88,7 +97,7 @@ CREATE TABLE `equipements` (
 --
 
 INSERT INTO `equipements` (`id`, `designation`, `description`, `categorie_id`, `date_debut`, `prix`, `marque`, `reference`, `piece_de_rechange`, `document`, `service_id`, `created_at`, `updated_at`, `image`) VALUES
-(1, 'xxxx', '6 x 2 RAM 128 GB ROM OctaxCore 2.32GHz', 1, '2023-01-20', 4200, 'HP', 'xxxxx', 0, '1674252072.txt', 5, '2023-01-20 21:01:12', '2023-01-20 21:01:12', '1674252072.png');
+(1, '350 LBS', 'Note: In order for the above classes to work, Bootstrap border classes should also be mentioned along with the above classes. The below examples use the Bootstrap “border” class.\n\nExample 2: The following example demonstrates classes “border-primary”, “border-secondary”, “border-success”,”border-danger”,”border-warning” with blue,gray,green,red and yellow colors respecively.', 1, '2023-02-15', 1750, 'EPSON', 'LBG3500-1', 0, '', 5, '2023-02-27 10:59:34', '2023-02-27 10:59:34', '1677499174.png');
 
 -- --------------------------------------------------------
 
@@ -111,12 +120,9 @@ CREATE TABLE `etablissements` (
 --
 
 INSERT INTO `etablissements` (`id`, `raison_social`, `adresse`, `telephone`, `responsable`, `created_at`, `updated_at`) VALUES
-(1, 'Unité de formation', 'Rue Nawal', '06979078097', 'Mr. Ahmed', NULL, NULL),
 (2, 'CHU Fés', 'Rue Hassan II, 212', '056889690', 'Mr; pfff', NULL, NULL),
 (3, 'IFMOTICA', 'Wiesbaden,3307', '08080808', 'xxxx', NULL, NULL),
-(5, 'Clinique atlass', 'rue sefrou', '057698698', '068709797', NULL, NULL),
-(6, 'test111', 'Wiesbaden,33072', '0000000', 'xxxxXXX', NULL, NULL),
-(7, 'test', 'Wiesbaden,3307', 'xxxx', 'xxxxXXX', NULL, NULL);
+(5, 'Clinique atlass', 'rue sefrou', '057698698', '068709797', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -132,6 +138,15 @@ CREATE TABLE `etats` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `etats`
+--
+
+INSERT INTO `etats` (`id`, `tach_id`, `etat`, `conteur`, `created_at`, `updated_at`) VALUES
+(1, 4, 'pas encore', 0, NULL, NULL),
+(5, 4, 'en cours', 50, NULL, NULL),
+(6, 1, 'fini', 30, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -182,8 +197,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (14, '2023_01_13_211923_create_piece_activites_table', 1),
 (15, '2023_01_16_201433_add_status_field_to_users', 1),
 (16, '2023_01_19_165029_add_image_field_to_equipements', 1),
-(17, '2023_01_20_081446_add_image_field_to_users', 2),
-(18, '2023_01_22_001657_add_image_field_to_techniciens', 3);
+(17, '2023_01_20_081446_add_image_field_to_users', 1),
+(18, '2023_01_22_001657_add_image_field_to_techniciens', 1);
 
 -- --------------------------------------------------------
 
@@ -250,8 +265,7 @@ CREATE TABLE `services` (
 --
 
 INSERT INTO `services` (`id`, `nom_service`, `etablissement_id`, `created_at`, `updated_at`) VALUES
-(5, 'santé', 2, NULL, NULL),
-(6, 'Formation', 1, NULL, NULL);
+(5, 'santé', 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -272,7 +286,8 @@ CREATE TABLE `specialites` (
 
 INSERT INTO `specialites` (`id`, `specialite`, `created_at`, `updated_at`) VALUES
 (1, 'FullStack', NULL, NULL),
-(2, 'Networking', NULL, NULL);
+(2, 'Networking', NULL, NULL),
+(3, 'Marketing', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -296,7 +311,11 @@ CREATE TABLE `taches` (
 INSERT INTO `taches` (`id`, `description`, `date`, `duree`, `created_at`, `updated_at`) VALUES
 (1, 'optimize your routing code(2/3)', '2023-01-11', 1, NULL, NULL),
 (3, 'eat then sleep', '2023-01-20', 1, NULL, NULL),
-(4, 'boost the CMMS App', '2023-01-21', 2, NULL, NULL);
+(4, 'boost the CMMS App', '2023-01-21', 2, NULL, NULL),
+(5, 'test2', '2023-02-07', 3, NULL, NULL),
+(6, 'Test2', '2023-01-31', 2, NULL, NULL),
+(7, 'eliteBook', '2023-02-27', 1, NULL, NULL),
+(8, 'Test2', '2023-02-16', 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -306,23 +325,22 @@ INSERT INTO `taches` (`id`, `description`, `date`, `duree`, `created_at`, `updat
 
 CREATE TABLE `techniciens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `nom` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `prenom` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `telephone` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `specialite_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `techniciens`
 --
 
-INSERT INTO `techniciens` (`id`, `nom`, `prenom`, `telephone`, `email`, `specialite_id`, `created_at`, `updated_at`, `image`) VALUES
-(1, 'Emillya', 'Karolin', '0000000', 'emalekarolin@gmail.com', 1, NULL, NULL, '1674484765.jpg'),
-(2, 'Thomas', 'Yare', '0000000', 'Thomas@gmail.com', 2, NULL, NULL, 'default.png');
+INSERT INTO `techniciens` (`id`, `telephone`, `specialite_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(12, '0666768798', 2, 11, NULL, NULL),
+(13, '0709435546', 2, 9, NULL, NULL),
+(14, '0682914128', 1, 26, NULL, NULL),
+(15, '0611661166', 3, 27, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -348,28 +366,29 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `status`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `image`) VALUES
-(1, 'emale karolin', 0, 'emalekarolin@gmail.com', NULL, '$2y$10$zoOeoVk7izhoowCPKSpSmeh7Vcn/bi2EDtL.gNZ83gnKRy5Vrtevy', NULL, '2023-01-19 23:32:38', '2023-01-19 23:32:38', NULL),
-(2, 'Oussama Belhadi', 1, 'oussamabelhadi5@gmail.com', NULL, '$2y$10$zoOeoVk7izhoowCPKSpSmeh7Vcn/bi2EDtL.gNZ83gnKRy5Vrtevy', NULL, '2023-01-19 23:33:02', '2023-01-20 08:38:17', '1674207356.png'),
-(5, 'Rogers Marquardt', 0, 'timothy.dare@example.net', '2023-01-23 16:10:44', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'zjPThZ3WXl', '2023-01-23 16:10:46', '2023-01-23 16:10:46', NULL),
-(6, 'Hollis Rau', 0, 'mann.ewald@example.org', '2023-01-23 16:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'gtol8fxfau', '2023-01-23 16:10:46', '2023-01-23 16:10:46', NULL),
-(7, 'Dr. Amos Jast MD', 0, 'leuschke.juliana@example.org', '2023-01-23 16:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'MPWaFloU2r', '2023-01-23 16:10:46', '2023-01-23 16:10:46', NULL),
-(8, 'Domenica Carroll', 0, 'jabari.damore@example.com', '2023-01-23 16:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Blsd32tWFh', '2023-01-23 16:10:46', '2023-01-23 16:10:46', NULL),
-(9, 'Beau Hackett', 0, 'erika74@example.net', '2023-01-23 16:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'AkiQFQeieP', '2023-01-23 16:10:46', '2023-01-23 16:10:46', NULL),
-(10, 'Kaya Feil DDS', 0, 'kathryn.shanahan@example.org', '2023-01-23 16:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'ojD0teQprJ', '2023-01-23 16:10:46', '2023-01-23 16:10:46', NULL),
-(11, 'Melody Hayes II', 0, 'thomas59@example.org', '2023-01-23 16:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'T1erPvhQ76', '2023-01-23 16:10:46', '2023-01-23 16:10:46', NULL),
-(12, 'Audrey Mayer', 0, 'alindgren@example.com', '2023-01-23 16:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '5DD1GCY4ua', '2023-01-23 16:10:46', '2023-01-23 16:10:46', NULL),
-(13, 'Eveline Langworth', 0, 'elouise11@example.net', '2023-01-23 16:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'N6TC8EuCwn', '2023-01-23 16:10:46', '2023-01-23 16:10:46', NULL),
-(14, 'Gregory Rippin', 0, 'schimmel.margaret@example.net', '2023-01-23 16:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'l5D2pMNWmR', '2023-01-23 16:10:46', '2023-01-23 16:10:46', NULL),
-(15, 'Dr. Roxanne Zulauf DVM', 0, 'lea.marquardt@example.com', '2023-01-23 16:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'xATYnQRQM6', '2023-01-23 16:10:46', '2023-01-23 16:10:46', NULL),
-(16, 'Mr. Kurt Hahn', 0, 'ccarter@example.org', '2023-01-23 16:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'PMrkKeMEv5', '2023-01-23 16:10:46', '2023-01-23 16:10:46', NULL),
-(17, 'Dr. Jamaal Steuber', 0, 'isidro.connelly@example.net', '2023-01-23 16:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'cMMuJLSfj6', '2023-01-23 16:10:46', '2023-01-23 16:10:46', NULL),
-(18, 'Audrey Gutkowski', 0, 'hildegard46@example.com', '2023-01-23 16:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Ipua28OO6F', '2023-01-23 16:10:46', '2023-01-23 16:10:46', NULL),
-(19, 'Dr. Hipolito Wisozk', 0, 'cremin.mckenzie@example.com', '2023-01-23 16:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'ZVSJJ77WTJ', '2023-01-23 16:10:46', '2023-01-23 16:10:46', NULL),
-(20, 'Dr. Raleigh Cartwright Jr.', 0, 'rpouros@example.net', '2023-01-23 16:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'YwXBnUkFil', '2023-01-23 16:10:46', '2023-01-23 16:10:46', NULL),
-(21, 'Miss Stephanie Gottlieb PhD', 0, 'may39@example.com', '2023-01-23 16:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'AzLg4NWz5N', '2023-01-23 16:10:46', '2023-01-23 16:10:46', NULL),
-(22, 'Prof. Kira Considine', 0, 'hhudson@example.com', '2023-01-23 16:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'XYSwK8AXI0', '2023-01-23 16:10:46', '2023-01-23 16:10:46', NULL),
-(23, 'Mrs. Rosalee Buckridge V', 0, 'parisian.theron@example.org', '2023-01-23 16:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'IJYebzJktt', '2023-01-23 16:10:46', '2023-01-23 16:10:46', NULL),
-(24, 'Raegan Boyle IV', 0, 'narciso.leuschke@example.org', '2023-01-23 16:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'hbrbRnNT6E', '2023-01-23 16:10:46', '2023-01-23 16:10:46', NULL);
+(5, 'Rogers Marquardt', 0, 'timothy.dare@example.net', '2023-01-23 15:10:44', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'zjPThZ3WXl', '2023-01-23 15:10:46', '2023-01-23 15:10:46', 'default.png'),
+(6, 'Hollis Rau', 0, 'mann.ewald@example.org', '2023-01-23 15:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'gtol8fxfau', '2023-01-23 15:10:46', '2023-01-23 15:10:46', 'default.png'),
+(7, 'Dr. Amos Jast MD', 0, 'leuschke.juliana@example.org', '2023-01-23 15:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'MPWaFloU2r', '2023-01-23 15:10:46', '2023-01-23 15:10:46', 'default.png'),
+(8, 'Domenica Carroll', 0, 'jabari.damore@example.com', '2023-01-23 15:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Blsd32tWFh', '2023-01-23 15:10:46', '2023-01-23 15:10:46', NULL),
+(9, 'Beau Hackett', 0, 'erika74@example.net', '2023-01-23 15:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'AkiQFQeieP', '2023-01-23 15:10:46', '2023-01-23 15:10:46', 'default.png'),
+(10, 'Kaya Feil DDS', 0, 'kathryn.shanahan@example.org', '2023-01-23 15:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'ojD0teQprJ', '2023-01-23 15:10:46', '2023-01-23 15:10:46', NULL),
+(11, 'Melody Hayes II', 0, 'thomas59@example.org', '2023-01-23 15:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'T1erPvhQ76', '2023-01-23 15:10:46', '2023-01-23 15:10:46', 'default.png'),
+(12, 'Audrey Mayer', 0, 'alindgren@example.com', '2023-01-23 15:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '5DD1GCY4ua', '2023-01-23 15:10:46', '2023-01-23 15:10:46', NULL),
+(13, 'Eveline Langworth', 0, 'elouise11@example.net', '2023-01-23 15:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'N6TC8EuCwn', '2023-01-23 15:10:46', '2023-01-23 15:10:46', NULL),
+(14, 'Gregory Rippin', 0, 'schimmel.margaret@example.net', '2023-01-23 15:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'l5D2pMNWmR', '2023-01-23 15:10:46', '2023-01-23 15:10:46', NULL),
+(15, 'Dr. Roxanne Zulauf DVM', 0, 'lea.marquardt@example.com', '2023-01-23 15:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'xATYnQRQM6', '2023-01-23 15:10:46', '2023-01-23 15:10:46', NULL),
+(16, 'Mr. Kurt Hahn', 0, 'ccarter@example.org', '2023-01-23 15:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'PMrkKeMEv5', '2023-01-23 15:10:46', '2023-01-23 15:10:46', NULL),
+(17, 'Dr. Jamaal Steuber', 0, 'isidro.connelly@example.net', '2023-01-23 15:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'cMMuJLSfj6', '2023-01-23 15:10:46', '2023-01-23 15:10:46', NULL),
+(18, 'Audrey Gutkowski', 0, 'hildegard46@example.com', '2023-01-23 15:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Ipua28OO6F', '2023-01-23 15:10:46', '2023-01-23 15:10:46', NULL),
+(19, 'Dr. Hipolito Wisozk', 0, 'cremin.mckenzie@example.com', '2023-01-23 15:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'ZVSJJ77WTJ', '2023-01-23 15:10:46', '2023-01-23 15:10:46', NULL),
+(20, 'Dr. Raleigh Cartwright Jr.', 0, 'rpouros@example.net', '2023-01-23 15:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'YwXBnUkFil', '2023-01-23 15:10:46', '2023-01-23 15:10:46', NULL),
+(21, 'Miss Stephanie Gottlieb PhD', 0, 'may39@example.com', '2023-01-23 15:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'AzLg4NWz5N', '2023-01-23 15:10:46', '2023-01-23 15:10:46', NULL),
+(22, 'Prof. Kira Considine', 0, 'hhudson@example.com', '2023-01-23 15:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'XYSwK8AXI0', '2023-01-23 15:10:46', '2023-01-23 15:10:46', NULL),
+(23, 'Mrs. Rosalee Buckridge V', 0, 'parisian.theron@example.org', '2023-01-23 15:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'IJYebzJktt', '2023-01-23 15:10:46', '2023-01-23 15:10:46', NULL),
+(24, 'Raegan Boyle IV', 0, 'narciso.leuschke@example.org', '2023-01-23 15:10:45', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'hbrbRnNT6E', '2023-01-23 15:10:46', '2023-01-23 15:10:46', NULL),
+(25, 'Oussama Belhadi', 1, 'oussamabelhadi5@gmail.com', NULL, '$2y$10$ZYBrW1cur2xXHgrPdYpOh.SL2IwH56NCaEu5ziGMUA36qAZyjpjR2', NULL, '2023-02-26 20:23:02', '2023-02-26 20:23:02', '1674207356.png'),
+(26, 'emale karolin', 0, 'emalekarolin@gmail.com', NULL, '$2y$10$BH1stz/RlV5EtikzJkqo.ONPTsfQrXlTdun1WZm7Z6fbyE.YHY0K6', NULL, '2023-02-26 21:02:14', '2023-02-26 21:02:14', '1677465499.png'),
+(27, 'Gojo Sturo', 0, 'gojosturo@gmail.com', NULL, '$2y$10$aGtghBTayFZ12qDLVgVJAeVGohziChlCRK7wJVaVKNqrxYpjuw5C.', NULL, '2023-02-27 01:44:27', '2023-02-27 01:44:27', '1677467095.jpg');
 
 --
 -- Indexes for dumped tables
@@ -380,9 +399,9 @@ INSERT INTO `users` (`id`, `name`, `status`, `email`, `email_verified_at`, `pass
 --
 ALTER TABLE `activites`
   ADD PRIMARY KEY (`id`),
+  ADD KEY `activites_etat_id_foreign` (`etat_id`),
   ADD KEY `activites_tache_id_foreign` (`tache_id`),
-  ADD KEY `activites_technicien_id_foreign` (`technicien_id`),
-  ADD KEY `activites_etat_id_foreign` (`etat_id`);
+  ADD KEY `technicien_id` (`technicien_id`);
 
 --
 -- Indexes for table `categories`
@@ -470,7 +489,8 @@ ALTER TABLE `taches`
 --
 ALTER TABLE `techniciens`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `techniciens_specialite_id_foreign` (`specialite_id`);
+  ADD KEY `techniciens_specialite_id_foreign` (`specialite_id`),
+  ADD KEY `techniciens_user_id_foreign` (`user_id`);
 
 --
 -- Indexes for table `users`
@@ -487,7 +507,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `activites`
 --
 ALTER TABLE `activites`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -499,19 +519,19 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `equipements`
 --
 ALTER TABLE `equipements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `etablissements`
 --
 ALTER TABLE `etablissements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `etats`
 --
 ALTER TABLE `etats`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -547,25 +567,25 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `specialites`
 --
 ALTER TABLE `specialites`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `taches`
 --
 ALTER TABLE `taches`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `techniciens`
 --
 ALTER TABLE `techniciens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Constraints for dumped tables
@@ -575,9 +595,10 @@ ALTER TABLE `users`
 -- Constraints for table `activites`
 --
 ALTER TABLE `activites`
-  ADD CONSTRAINT `activites_etat_id_foreign` FOREIGN KEY (`etat_id`) REFERENCES `etats` (`id`),
-  ADD CONSTRAINT `activites_tache_id_foreign` FOREIGN KEY (`tache_id`) REFERENCES `taches` (`id`),
-  ADD CONSTRAINT `activites_technicien_id_foreign` FOREIGN KEY (`technicien_id`) REFERENCES `techniciens` (`id`);
+  ADD CONSTRAINT `activites_etat_id_foreign` FOREIGN KEY (`etat_id`) REFERENCES `etats` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `activites_tache_id_foreign` FOREIGN KEY (`tache_id`) REFERENCES `taches` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `activites_technicien_id_foreign` FOREIGN KEY (`technicien_id`) REFERENCES `techniciens` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `technicien_id` FOREIGN KEY (`technicien_id`) REFERENCES `techniciens` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `equipements`
@@ -596,20 +617,21 @@ ALTER TABLE `etats`
 -- Constraints for table `piece_activites`
 --
 ALTER TABLE `piece_activites`
-  ADD CONSTRAINT `piece_activites_activite_id_foreign` FOREIGN KEY (`activite_id`) REFERENCES `activites` (`id`),
-  ADD CONSTRAINT `piece_activites_equipement_id_foreign` FOREIGN KEY (`equipement_id`) REFERENCES `equipements` (`id`);
+  ADD CONSTRAINT `piece_activites_activite_id_foreign` FOREIGN KEY (`activite_id`) REFERENCES `activites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `piece_activites_equipement_id_foreign` FOREIGN KEY (`equipement_id`) REFERENCES `equipements` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `services`
 --
 ALTER TABLE `services`
-  ADD CONSTRAINT `services_etablissement_id_foreign` FOREIGN KEY (`etablissement_id`) REFERENCES `etablissements` (`id`);
+  ADD CONSTRAINT `services_etablissement_id_foreign` FOREIGN KEY (`etablissement_id`) REFERENCES `etablissements` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `techniciens`
 --
 ALTER TABLE `techniciens`
-  ADD CONSTRAINT `techniciens_specialite_id_foreign` FOREIGN KEY (`specialite_id`) REFERENCES `specialites` (`id`);
+  ADD CONSTRAINT `techniciens_specialite_id_foreign` FOREIGN KEY (`specialite_id`) REFERENCES `specialites` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `techniciens_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

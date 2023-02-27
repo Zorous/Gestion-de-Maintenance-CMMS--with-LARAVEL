@@ -3,6 +3,11 @@
 
 @section('content')
 @php use Illuminate\Support\Facades\DB;@endphp
+@if (session()->has('success'))
+<div class="container"><div class="alert alert-success mt-5 ml-5" role="alert">
+    {{ session()->get('success') }}
+</div></div>
+@endif
 <div class="content-wrapper">
 
 <section class="content">
@@ -40,6 +45,7 @@
         <tr>
           <th>ID</th>
           <th>Description</th>
+          <th>Tache</th>
           <th>Date</th>
           <th>Durée</th>
           <th>Etats</th>
@@ -51,31 +57,31 @@
         @foreach($activites as $activite)
          <tr>
           <td>{{$activite->id}}</td>
+          <td>{{$activite->description_activite}}</td>
           <td>{{$activite->description}}</td>
           <td>{{$activite->date}}</td>
           <td>{{$activite->duree}} Jour(s)</td>
           <td>
             @if($activite->etat == "pas encore")
-           <span style="background:rgba(255,0,0,0.1);border-radius:24px;:120px;color:red;padding:4px;">{{$activite->etat}}</span> 
+           <span style="background:rgba(255,0,0,0.1);border-radius:24px;:120px;color:red;padding:4px;">{{$activite->etat}}</span>
             @elseif($activite->etat == "en cours")
-            <span style="background:rgba(255,255,0,0.2);border-radius:24px;:120px;color:orange;padding:4px;">{{$activite->etat}}</span> 
+            <span style="background:rgba(255,255,0,0.2);border-radius:24px;:120px;color:orange;padding:4px;">{{$activite->etat}}</span>
             @elseif($activite->etat == "fini")
-            <span style="background:rgba(0,255,0,0.1);border-radius:24px;:120px;color:green;padding:4px;">{{$activite->etat}}</span> 
+            <span style="background:rgba(0,255,0,0.1);border-radius:24px;:120px;color:green;padding:4px;">{{$activite->etat}}</span>
             @endif
         </td>
-        @php 
+        @php
         $user = DB::table('users')->where('users.id','=',$activite->user_id)->first();
-        // dd($user);
         @endphp
         <td>
             <img src={{"/uploads/techniciens_imgs/$user->image"}} class="img-circle elevation-2"
-            style="width:45px !important;height:45px !important;" alt="User Image">        Nom : {{$user->name}} <br>
+            style="width:45px !important;height:45px !important;" alt="User Image">  <b>{{$user->name}}</b> <br>
         Téle : {{$activite->telephone}}  <br>
         E-Mail : {{$user->email}}
         </td>
           <td>
-           <a href="{{ route('etablissements.edit',$activite->id) }}"><button class="btn btn-warning mb-2"><i class="fa-solid fa-pen-to-square"></i></button></a>
-           <form onsubmit="confirm('êtes-vous sûr de vouloir supprimer cet élément')" action="{{ route('etablissements.destroy',$activite->id) }}" method="POST">
+           <a href="{{ route('activites.edit',$activite->id) }}"><button class="btn btn-warning mb-2"><i class="fa-solid fa-pen-to-square"></i></button></a>
+           <form onsubmit="confirm('êtes-vous sûr de vouloir supprimer cet élément')" action="{{ route('activites.destroy',$activite->id) }}" method="POST">
             @csrf
             @method('DELETE')
             <button
@@ -85,9 +91,7 @@
          </form> </td>
         </tr>
         @endforeach
-
         </tbody>
-
       </table>
     </div>
     <!-- /.card-body -->

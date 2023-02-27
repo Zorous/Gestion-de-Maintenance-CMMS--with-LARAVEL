@@ -9,7 +9,7 @@
             <div class="form-group">
                 <label for="description">Description</label>
                 <input type="text" class="form-control @error('description') border-danger @enderror"
-                    name="description" 
+                    name="description"
                     id="description">
                 @error('description')
                     <p style="color:red;">
@@ -38,11 +38,12 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="duree">Technicien</label>
+                <label for="duree">Technicien</label><br>
+                <small style="color:orange">(si vous ne trouvez pas le technicien que vous voulez ici, ajoutez-le d'abord dans la liste des techniciens)</small>
                 <select name="technicien_id" class="form-control @error("description") border-danger @enderror">
                     <option value="none" selected disabled hidden>Affecter un technicien a cette activité</option>
-                    @foreach($users as $user)
-                    <option value="{{$user->id}}">{{$user->name}}</option>
+                    @foreach($techniciens as $technicien)
+                    <option value="{{$technicien->id}}">{{$technicien->name}}</option>
                     @endforeach
                 </select>
                 @error('user_id')
