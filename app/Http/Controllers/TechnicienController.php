@@ -76,22 +76,38 @@ class TechnicienController extends Controller
 
 
     public function update(Request $request, $id)
-    {
+    {       
+        $tech = Technicien::where("techniciens.user_id","=",$id)->first();
+
         $request->validate(
             [
                 "tele" => "required",
                 "image" => "image|mimes:jpg,png,jpeg,gif,svg|max:2048"
             ]
         );
+        if ($request->has('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . "." . $extension;
+            $file->move('uploads/techniciens_imgs', $filename);
+            $request->image = $filename;
+            DB::table('users')->whereId($tech->user_id)->update([
+                "image" => $request->image,
+            ]);
+        }
+        else{
+            $request->image = $tech->image;
+        }
 
-        $tech = Technicien::where("techniciens.user_id","=",$id);
 
         $tech->telephone = $request->input("tele");
         $tech->specialite_id =$request->input("specialites");
+        
+ 
 
 
-        // $tech->update();
-        // return view('services.techniciens.index')->with("l'element a éte modifié avec succéss");
+        $tech->update();
+        return redirect()->route('techniciens.index')->with("l'element a éte modifié avec succéss");
 
     }
 

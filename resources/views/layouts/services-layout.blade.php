@@ -166,6 +166,14 @@
                                     </p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('activites.index') }}" class="nav-link">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                    <p>
+                                        Activités
+                                    </p>
+                                </a>
+                            </li>
                             {{-- item --}}
                             <li class="nav-item">
                                 <a href="{{ route('taches.index') }}" class="nav-link">

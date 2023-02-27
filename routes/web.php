@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActiviteController;
 use App\Http\Controllers\CalendersController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\EquipementsController;
@@ -30,12 +31,14 @@ Route::get('/profile/{id}/edit',[ProfileController::class,"edit"]);
 Route::put('/services/profile/update/{id}',[ProfileController::class,"update"]);
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-/* Route::group(array('before' =>["check_login",'auth']), function()
+Route::group(array('before' =>["check_login",'auth']), function()
 {
-}); */
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home/activite_details/{id}', [App\Http\Controllers\HomeController::class, 'details'])->name('activite.details');
+
+});
 
 //____________________________________________Taches_______________________________________________
 
@@ -56,6 +59,8 @@ Route::resource('etablissements',EtablissementController::class);
 
 //Techniciens
 Route::resource('techniciens',TechnicienController::class);
+//Techniciens
+Route::resource('activites',ActiviteController::class);
 
 //Calender
 Route::resource('calender',CalendersController::class);
